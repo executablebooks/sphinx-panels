@@ -20,6 +20,7 @@ setup(
     author="Chris Sewell",
     author_email="chrisj_sewell@hotmail.com",
     url="https://github.com/executablebooks/sphinx-panels",
+    project_urls={"Documentation": "https://sphinx-panels.readthedocs.io"},
     license="MIT",
     packages=find_packages(),
     package_data={"sphinx_panels": ["_static/panels.css"]},
