@@ -19,8 +19,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "Executable Books Project"
-copyright = "2020, Chris Sewell"
+project = "Sphinx-Panels"
+copyright = "2020, Executable Books Project"
 author = "Chris Sewell"
 
 # The short X.Y version

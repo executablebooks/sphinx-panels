@@ -44,6 +44,11 @@ The panels are separated by three or more ``-``
 
     Content of the bottom-right panel
 
+.. note::
+
+    If the viewing window is shrunk to less than a threshold width,
+    then the panels will re-order to a single column.
+
 
 Installation
 ============
