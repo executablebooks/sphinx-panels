@@ -45,8 +45,8 @@ and `cards layout <https://www.w3schools.com/bootstrap4/bootstrap_cards.asp>`_.
 
 .. note::
 
-    If the theme being used is a not a bootstrap one,
-    than the relevant CSS will be loaded by this extension.
+    If the theme being used is a not a bootstrap based one,
+    then the relevant CSS will be loaded by this extension.
 
 
 Installation
