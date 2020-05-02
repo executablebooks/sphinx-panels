@@ -5,13 +5,12 @@
 [![PyPI][pypi-badge]][pypi-link]
 
 A sphinx extension for creating panels in a grid layout.
-
-This directive creates panels of content in a 2 x N layout.
-The panels are separated by three or more ``-``
+utilising both the bootstrap 4
+[grid system](https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp),
+and [cards layout](https://www.w3schools.com/bootstrap4/bootstrap_cards.asp).
 
 ```rst
 .. panels::
-    :centred:
 
     Content of the top-left panel
 
