@@ -87,7 +87,7 @@ Default classes for all panels may be set in the directive options,
 then panel specific classes can be added at the start of each panel.
 `=` will reset the classes, or `+=` will add to the default classes.
 
-.. sealso::
+.. seealso::
 
     `Bootstrap grid examples <https://getbootstrap.com/docs/4.4/examples/grid/>`_
 

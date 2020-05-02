@@ -114,7 +114,7 @@ class Panels(SphinxDirective):
             if header_split is not None:
                 title_content = content[opt_offset:header_split]
                 title_offset = self.content_offset + offset + opt_offset
-                body_start = header_split
+                body_start = header_split + 1
             else:
                 title_content = False
 
