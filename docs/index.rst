@@ -130,6 +130,34 @@ split by three or more `=` and `.` respectively.
     For card colouring, it is advised to use the bootstrap contextual classes:
     `bg-primary`, `bg-success`, `bg-info`, `bg-warning`, `bg-danger`, `bg-secondary`, `bg-dark` and `bg-light`.
 
+.. code-block:: rst
+
+    .. panels::
+        :card: shadow bg-primary
+
+        panel 1 header
+        ==============
+
+        panel 1 content
+
+        ...
+        panel 1 footer
+
+        ---
+        column += text-center
+        card = bg-info
+        title = bg-success
+        footer = bg-secondary
+
+
+        panel 2 header
+        ==============
+
+        panel 2 content
+
+        ...
+        panel 2 footer
+
 .. panels::
     :card: shadow bg-primary
 
