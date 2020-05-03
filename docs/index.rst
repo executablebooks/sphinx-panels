@@ -43,10 +43,10 @@ and `cards layout <https://www.w3schools.com/bootstrap4/bootstrap_cards.asp>`_.
 
     Content of the bottom-right panel
 
-.. note::
+.. tip::
 
-    If the theme being used is a not a bootstrap based one,
-    then the relevant CSS will be loaded by this extension.
+    Try shrinking the size of this window,
+    to see how the panels realign to compensate for small screens.
 
 
 Installation
@@ -74,6 +74,10 @@ E.g.:
         'sphinx_panels'
         ...
     ]
+
+This extension includes the bootstrap 4 CSS classes relevant to panels.
+They will be loaded by default but, if you are already using a bootstrap theme,
+you can disable it by adding ``add_boostrap_css = False`` to your ``conf.py``.
 
 Detailed Examples
 =================

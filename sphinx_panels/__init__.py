@@ -37,6 +37,8 @@ DEFAULT_CARD = "shadow"
 
 RE_OPTIONS = re.compile(r"(column|card|body|title|footer)\s*(\+?=)\s*(.*)")
 
+LOCAL_FOLDER = os.path.dirname(os.path.abspath(__file__))
+
 
 class Panels(SphinxDirective):
     """Two Column Panels."""
@@ -160,10 +162,12 @@ class Panels(SphinxDirective):
         return [parent]
 
 
-def add_static_path(app):
-    static_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "_static"))
-    if static_path not in app.config.html_static_path:
-        app.config.html_static_path.append(static_path)
+def add_static_paths(app):
+    app.config.html_static_path.append(os.path.join(LOCAL_FOLDER, "css"))
+    app.add_css_file("panels.css")
+    if app.config.add_boostrap_css:
+        app.add_css_file("bs-grids.css")
+        app.add_css_file("bs-cards.css")
 
 
 def visit_container(self, node):
@@ -180,14 +184,8 @@ def depart_container(self, node):
 
 def setup(app):
     app.add_directive("panels", Panels)
-    app.connect("builder-inited", add_static_path)
-
-    app.add_css_file("panels.css")
-
-    # TODO only load these is using a non-boostrap theme
-    app.add_css_file("bs-grids.css")
-    app.add_css_file("bs-cards.css")
-
+    app.add_config_value("add_boostrap_css", True, "env")
+    app.connect("builder-inited", add_static_paths)
     # we override container html visitors,
     # to stop the default behaviour of adding the `container` class to all nodes
     app.add_node(
