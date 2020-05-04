@@ -203,7 +203,7 @@ Card Styling
 ------------
 
 To style the look of cards,
-you may use the directive options to add default CSS classes for eac element,
+you may use the directive options to add default CSS classes for each element,
 or use the per-panel option syntax to add to or override these:
 
 - container: the top-level container
