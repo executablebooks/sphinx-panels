@@ -31,7 +31,7 @@ from sphinx.util.docutils import SphinxDirective
 
 __version__ = "0.2.0"
 
-DEFAULT_CONTAINER = "container pb-3"
+DEFAULT_CONTAINER = "container pb-4"
 DEFAULT_COLUMN = "col-lg-6 col-md-6 col-sm-6 col-xs-12"
 DEFAULT_CARD = "shadow"
 
