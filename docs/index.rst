@@ -6,8 +6,8 @@ A sphinx extension for creating panels in a grid layout.
 
 This directive creates panels of content in a grid layout,
 utilising both the bootstrap 4
-`grid system <https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp>`_,
-and `cards layout <https://www.w3schools.com/bootstrap4/bootstrap_cards.asp>`_.
+`grid system <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
+and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
 .. code-block:: rst
 
@@ -93,12 +93,13 @@ then panel specific classes can be added at the start of each panel.
 
 .. seealso::
 
-    `Bootstrap grid examples <https://getbootstrap.com/docs/4.4/examples/grid/>`_
+    The bootstrap 4 `grid documentation <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
+    and this `grid tutorial <https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp>`_
 
 .. code-block:: rst
 
     .. panels::
-        :container: container-lg pad-bottom-20
+        :container: container-lg pb-3
         :column: col-lg-4 col-md-4 col-sm-6 col-xs-12
 
         panel1
@@ -111,7 +112,7 @@ then panel specific classes can be added at the start of each panel.
         panel4
 
 .. panels::
-    :container: container-lg pad-bottom-20
+    :container: container-lg pb-3
     :column: col-lg-4 col-md-4 col-sm-6 col-xs-12
 
     panel1
@@ -129,54 +130,132 @@ Card Layout
 Each panel contains a card, which can itself contain a header and/or footer,
 split by three or more `=` and `.` respectively.
 
-.. tip::
+.. seealso::
 
-    For card colouring, it is advised to use the bootstrap contextual classes:
-    `bg-primary`, `bg-success`, `bg-info`, `bg-warning`, `bg-danger`, `bg-secondary`, `bg-dark` and `bg-light`.
+    The bootstrap 4 `card documentation <https://getbootstrap.com/docs/4.0/components/card/>`_,
+    and this `card tutorial <https://www.w3schools.com/bootstrap4/bootstrap_cards.asp>`_
 
 .. code-block:: rst
 
     .. panels::
-        :card: shadow bg-primary
 
         panel 1 header
         ==============
 
         panel 1 content
 
-        ...
+        more content
+
+        ..............
         panel 1 footer
 
         ---
-        column += text-center
-        card = bg-info
-        title = bg-success
-        footer = bg-secondary
-
 
         panel 2 header
         ==============
 
         panel 2 content
 
-        ...
+        ..............
         panel 2 footer
 
 .. panels::
-    :card: shadow bg-primary
 
     panel 1 header
     ==============
 
     panel 1 content
 
-    ...
+    more content
+
+    ..............
     panel 1 footer
 
     ---
-    column += text-center
-    card = bg-info
-    title = bg-success
+
+    panel 2 header
+    ==============
+
+    panel 2 content
+
+    ..............
+    panel 2 footer
+
+
+Card Styling
+------------
+
+To style the look of cards,
+you may use the directive options to add default CSS classes for eac element,
+or use the per-panel option syntax to add to or override these:
+
+- container: the top-level container
+- column: the panel container
+- card: the panel card
+- body: the panel card
+- header: the panel header
+- footer: the panel footer
+
+You can add your own CSS (see
+`the html_css_files option <https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_css_files>`_)
+but it is advised you use the built-in bootstrap classes:
+
+- `Card colouring <https://getbootstrap.com/docs/4.0/utilities/colors/>`_  contextual classes: `bg-primary`, `bg-success`, `bg-info`, `bg-warning`, `bg-danger`, `bg-secondary`, `bg-dark` and `bg-light`.
+- `Padding and margins <https://getbootstrap.com/docs/4.0/utilities/spacing/>`_: `border-0`, `p-2`, `m-2`, ...
+- `Text alignment <https://getbootstrap.com/docs/4.0/utilities/text/#text-alignment>`_: `text-justify`, `text-left`, `text-center`, `text-right`
+
+.. code-block:: rst
+
+    .. panels::
+        :body: bg-primary text-justify
+        :header: text-center
+        :footer: text-right
+
+        ---
+        column += p-1
+
+        panel 1 header
+        ==============
+
+        panel 1 content
+
+        ..............
+        panel 1 footer
+
+        ---
+        column += p-1 text-center border-0
+        body = bg-info
+        header = bg-success
+        footer = bg-secondary
+
+        panel 2 header
+        ==============
+
+        panel 2 content
+
+        ..............
+        panel 2 footer
+
+.. panels::
+    :body: bg-primary text-justify
+    :header: text-center
+    :footer: text-right
+
+    ---
+    column += p-1
+
+    panel 1 header
+    ==============
+
+    panel 1 content
+
+    ..............
+    panel 1 footer
+
+    ---
+    column += p-1 text-center border-0
+    body = bg-info
+    header = bg-success
     footer = bg-secondary
 
 
@@ -185,9 +264,8 @@ split by three or more `=` and `.` respectively.
 
     panel 2 content
 
-    ...
+    ..............
     panel 2 footer
-
 
 All Features
 ------------
@@ -195,13 +273,14 @@ All Features
 .. code-block:: rst
 
     .. panels::
-        :container: container-fluid pad-bottom-20
-        :column: col-lg-6 col-md-6 col-sm-12 col-xs-12
+        :container: container-fluid pb-3
+        :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
         :card: shadow
+        :header: border-0
+        :footer: border-0
 
         ---
         card += bg-warning
-        footer += bg-danger
 
         header
         ======
@@ -227,19 +306,20 @@ All Features
 
         ---
         column = col-lg-12
-        card += bg-success
+        card += bg-success text-center
 
         Content of the bottom panel
 
 
 .. panels::
-    :container: container-fluid pad-bottom-20
-    :column: col-lg-6 col-md-6 col-sm-12 col-xs-12
+    :container: container-fluid pb-3
+    :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
     :card: shadow
+    :header: border-0
+    :footer: border-0
 
     ---
     card += bg-warning
-    footer += bg-danger
 
     header
     ======
@@ -264,7 +344,12 @@ All Features
     footer
 
     ---
-    column = col-lg-12
-    card += bg-success
+    column = col-lg-12 p-3
+    card += bg-success text-center
 
     Content of the bottom panel
+
+Acknowledgements
+================
+
+Originally adapted from the `pandas documentation <https://pandas.pydata.org/docs/>`_.

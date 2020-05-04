@@ -192,6 +192,9 @@
     .bg-transparent {
     background-color:transparent!important
     }
+    .text-justify {
+        text-align:justify!important
+    }
     .text-left {
     text-align:left!important
     }

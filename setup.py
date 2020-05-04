@@ -24,12 +24,13 @@ setup(
     license="MIT",
     packages=find_packages(),
     package_data={
-        "sphinx_panels": ["css/panels.css", "css/bs-cards.css", "css/bs-grids.css"]
+        "sphinx_panels": ["css/bs-cards.css", "css/bs-grids.css", "css/bs-borders.css"]
     },
     install_requires=["docutils", "sphinx"],
     extras_require={
         "rtd": ["sphinx-rtd-theme"],
         "code_style": ["flake8<3.8.0,>=3.7.0", "black", "pre-commit==1.17.0"],
+        "testing": ["pytest>=3.6,<4"],
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -37,5 +38,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Sphinx :: Extension",
     ],
-    keywords="sphinx html",
+    keywords="sphinx html bootstrap",
 )
