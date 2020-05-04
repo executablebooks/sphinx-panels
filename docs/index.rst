@@ -94,6 +94,17 @@ then panel specific classes can be added at the start of each panel.
     The bootstrap 4 `grid documentation <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
     and this `grid tutorial <https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp>`_
 
+.. note::
+
+    The default classes are:
+
+    .. code-block:: rst
+
+        .. panels::
+            :container: container pb-4
+            :column: col-lg-6 col-md-6 col-sm-6 col-xs-12
+            :card: shadow
+
 .. code-block:: rst
 
     .. panels::
@@ -255,7 +266,6 @@ but it is advised you use the built-in bootstrap classes:
     body = bg-info
     header = bg-success
     footer = bg-secondary
-
 
     panel 2 header
     ==============
