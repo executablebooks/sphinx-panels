@@ -14,15 +14,15 @@ and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
 
     Content of the top-left panel
 
-    ---
+    ...
 
     Content of the top-right panel
 
-    ---
+    ...
 
     Content of the bottom-left panel
 
-    ---
+    ...
 
     Content of the bottom-right panel
 ```

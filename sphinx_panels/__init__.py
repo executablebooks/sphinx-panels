@@ -47,9 +47,9 @@ def parse_panels(
     content,
     content_offset,
     default_classes,
-    panel_char="-",
-    head_char="=",
-    foot_char=".",
+    panel_char=".",
+    head_char="^",
+    foot_char="+",
 ):
     """split a block of content into panels.
 
@@ -198,7 +198,14 @@ class Panels(SphinxDirective):
         }
 
         # split the block into panels
-        panel_blocks = parse_panels(self.content, self.content_offset, default_classes)
+        panel_blocks = parse_panels(
+            self.content,
+            self.content_offset,
+            default_classes,
+            head_char=self.env.app.config.panel_delimiters[0],
+            panel_char=self.env.app.config.panel_delimiters[1],
+            foot_char=self.env.app.config.panel_delimiters[2],
+        )
 
         # set the top-level containers
         parent = nodes.container(in_panel=True, classes=container_classes)
@@ -270,8 +277,21 @@ class Panels(SphinxDirective):
         return [parent]
 
 
-def add_static_paths(app):
+def validate_config(app, config):
+    if len(app.config.panel_delimiters) != 3:
+        raise AssertionError(
+            "panel_delimiters config must be of form: (header, body, footer)"
+        )
+    if len(set(app.config.panel_delimiters)) != 3:
+        raise AssertionError("panel_delimiters config must contain unique values")
+    for delim in app.config.panel_delimiters:
+        if not (isinstance(delim, str) and len(delim) == 1):
+            raise AssertionError(
+                "panel_delimiters config must contain only length 1 strings"
+            )
 
+
+def add_static_paths(app):
     if app.config.add_boostrap_css:
         app.config.html_static_path.append(os.path.join(LOCAL_FOLDER, "css"))
         app.add_css_file("bs-grids.css")
@@ -293,6 +313,8 @@ def depart_container(self, node):
 
 def setup(app):
     app.add_directive("panels", Panels)
+    app.add_config_value("panel_delimiters", ("^", ".", "+"), "env")
+    app.connect("config-inited", validate_config)
     app.add_config_value("add_boostrap_css", True, "env")
     app.connect("builder-inited", add_static_paths)
     # we override container html visitors,

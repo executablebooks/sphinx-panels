@@ -15,15 +15,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
         Content of the top-left panel
 
-        ---
+        ...
 
         Content of the top-right panel
 
-        ---
+        ...
 
         Content of the bottom-left panel
 
-        ---
+        ...
 
         Content of the bottom-right panel
 
@@ -31,15 +31,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
     Content of the top-left panel
 
-    ---
+    ...
 
     Content of the top-right panel
 
-    ---
+    ...
 
     Content of the bottom-left panel
 
-    ---
+    ...
 
     Content of the bottom-right panel
 
@@ -77,13 +77,21 @@ This extension includes the bootstrap 4 CSS classes relevant to panels.
 They will be loaded by default but, if you are already using a bootstrap theme,
 you can disable this by adding ``add_boostrap_css = False`` to your ``conf.py``.
 
+You can also change the delimiters used by adding ``panel_delimiters`` to your ``conf.py``,
+e.g. the default value is:
+
+.. code-block:: python
+
+    panel_delimiters = ("^", ".", "+")
+
+
 Detailed Examples
 =================
 
 Grid Layout
 -----------
 
-Panels are split by three or more `-` characters.
+Panels are split by three or more `...` characters.
 The layout of panels is then set by using the bootstrap classes.
 Default classes for all panels may be set in the directive options,
 then panel specific classes can be added at the start of each panel.
@@ -112,11 +120,11 @@ then panel specific classes can be added at the start of each panel.
         :column: col-lg-4 col-md-4 col-sm-6 col-xs-12
 
         panel1
-        ---
+        ...
         panel2
-        ---
+        ...
         panel3
-        ---
+        ...
         column = col-lg-12
         panel4
 
@@ -125,11 +133,11 @@ then panel specific classes can be added at the start of each panel.
     :column: col-lg-4 col-md-4 col-sm-6 col-xs-12
 
     panel1
-    ---
+    ...
     panel2
-    ---
+    ...
     panel3
-    ---
+    ...
     column = col-lg-12
     panel4
 
@@ -137,7 +145,7 @@ Card Layout
 -----------
 
 Each panel contains a card, which can itself contain a header and/or footer,
-split by three or more `=` and `.` respectively.
+split by three or more `^^^` and `+++` respectively.
 
 .. seealso::
 
@@ -149,45 +157,45 @@ split by three or more `=` and `.` respectively.
     .. panels::
 
         panel 1 header
-        ==============
+        ^^^^^^^^^^^^^^
 
         panel 1 content
 
         more content
 
-        ..............
+        ++++++++++++++
         panel 1 footer
 
-        ---
+        ...
 
         panel 2 header
-        ==============
+        ^^^^^^^^^^^^^^
 
         panel 2 content
 
-        ..............
+        ++++++++++++++
         panel 2 footer
 
 .. panels::
 
     panel 1 header
-    ==============
+    ^^^^^^^^^^^^^^
 
     panel 1 content
 
     more content
 
-    ..............
+    ++++++++++++++
     panel 1 footer
 
-    ---
+    ...
 
     panel 2 header
-    ==============
+    ^^^^^^^^^^^^^^
 
     panel 2 content
 
-    ..............
+    ++++++++++++++
     panel 2 footer
 
 
@@ -220,29 +228,29 @@ but it is advised you use the built-in bootstrap classes:
         :header: text-center
         :footer: text-right
 
-        ---
+        ...
         column += p-1
 
         panel 1 header
-        ==============
+        ^^^^^^^^^^^^^^
 
         panel 1 content
 
-        ..............
+        ++++++++++++++
         panel 1 footer
 
-        ---
+        ...
         column += p-1 text-center border-0
         body = bg-info
         header = bg-success
         footer = bg-secondary
 
         panel 2 header
-        ==============
+        ^^^^^^^^^^^^^^
 
         panel 2 content
 
-        ..............
+        ++++++++++++++
         panel 2 footer
 
 .. panels::
@@ -250,29 +258,29 @@ but it is advised you use the built-in bootstrap classes:
     :header: text-center
     :footer: text-right
 
-    ---
+    ...
     column += p-1
 
     panel 1 header
-    ==============
+    ^^^^^^^^^^^^^^
 
     panel 1 content
 
-    ..............
+    ++++++++++++++
     panel 1 footer
 
-    ---
+    ...
     column += p-1 text-center border-0
     body = bg-info
     header = bg-success
     footer = bg-secondary
 
     panel 2 header
-    ==============
+    ^^^^^^^^^^^^^^
 
     panel 2 content
 
-    ..............
+    ++++++++++++++
     panel 2 footer
 
 
@@ -288,62 +296,62 @@ but classes can also be used to add padding:
     .. panels::
         :img-top-cls: pl-5 pr-5
 
-        ---
+        ...
         img-top = _static/ebp-logo.png
         img-bottom = _static/footer-banner.jpg
 
         header 1
-        ===
+        ^^^^^^^^
 
         Panel 1 content
 
         More **content**
 
-        ...
+        ++++++
         tail 1
 
-        ---
+        ...
         img-top = _static/sphinx-logo.png
         img-top-cls += bg-success
         img-bottom = _static/footer-banner.jpg
 
         header 2
-        ===
+        ^^^^^^^^
 
         Panel 2 content
 
-        ...
+        ++++++
         tail 1
 
 .. panels::
     :img-top-cls: pl-5 pr-5
     :body: text-center
 
-    ---
+    ...
     img-top = _static/ebp-logo.png
     img-bottom = _static/footer-banner.jpg
 
     header 1
-    ===
+    ^^^^^^^^
 
     Panel 1 content
 
     More **content**
 
-    ...
+    ++++++
     tail 1
 
-    ---
+    ...
     img-top = _static/sphinx-logo.png
     img-top-cls += bg-success
     img-bottom = _static/footer-banner.jpg
 
     header 2
-    ===
+    ^^^^^^^^
 
     Panel 2 content
 
-    ...
+    ++++++
     tail 1
 
 Additional Examples
@@ -358,32 +366,30 @@ Additional Examples
         :header: border-0
         :footer: border-0
 
-        ---
+        ...
         card += bg-warning
 
         header
-        ======
+        ^^^^^^
 
         Content of the top-left panel
 
-        ...
-
+        ++++++
         footer
 
-        ---
+        ...
         card += bg-info
         footer += bg-danger
 
         header
-        ======
+        ^^^^^^
 
         Content of the top-right panel
 
-        ...
-
+        ++++++
         footer
 
-        ---
+        ...
         column = col-lg-12
         card += bg-success text-center
 
@@ -397,32 +403,30 @@ Additional Examples
     :header: border-0
     :footer: border-0
 
-    ---
+    ...
     card += bg-warning
 
     header
-    ======
+    ^^^^^^
 
     Content of the top-left panel
 
-    ...
-
+    ++++++
     footer
 
-    ---
+    ...
     card += bg-info
     footer += bg-danger
 
     header
-    ======
+    ^^^^^^
 
     Content of the top-right panel
 
-    ...
-
+    ++++++
     footer
 
-    ---
+    ...
     column = col-lg-12 p-3
     card += bg-success text-center
 
