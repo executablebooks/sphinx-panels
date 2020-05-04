@@ -202,9 +202,9 @@ class Panels(SphinxDirective):
             self.content,
             self.content_offset,
             default_classes,
-            head_char=self.env.app.config.panel_delimiters[0],
-            panel_char=self.env.app.config.panel_delimiters[1],
-            foot_char=self.env.app.config.panel_delimiters[2],
+            panel_char=self.env.app.config.panels_delimiters[0],
+            head_char=self.env.app.config.panels_delimiters[1],
+            foot_char=self.env.app.config.panels_delimiters[2],
         )
 
         # set the top-level containers
@@ -278,21 +278,21 @@ class Panels(SphinxDirective):
 
 
 def validate_config(app, config):
-    if len(app.config.panel_delimiters) != 3:
+    if len(app.config.panels_delimiters) != 3:
         raise AssertionError(
-            "panel_delimiters config must be of form: (header, body, footer)"
+            "panels_delimiters config must be of form: (header, body, footer)"
         )
-    if len(set(app.config.panel_delimiters)) != 3:
-        raise AssertionError("panel_delimiters config must contain unique values")
-    for delim in app.config.panel_delimiters:
+    if len(set(app.config.panels_delimiters)) != 3:
+        raise AssertionError("panels_delimiters config must contain unique values")
+    for delim in app.config.panels_delimiters:
         if not (isinstance(delim, str) and len(delim) == 1):
             raise AssertionError(
-                "panel_delimiters config must contain only length 1 strings"
+                "panels_delimiters config must contain only length 1 strings"
             )
 
 
 def add_static_paths(app):
-    if app.config.add_boostrap_css:
+    if app.config.panels_add_boostrap_css:
         app.config.html_static_path.append(os.path.join(LOCAL_FOLDER, "css"))
         app.add_css_file("bs-grids.css")
         app.add_css_file("bs-cards.css")
@@ -313,9 +313,9 @@ def depart_container(self, node):
 
 def setup(app):
     app.add_directive("panels", Panels)
-    app.add_config_value("panel_delimiters", ("^", ".", "+"), "env")
+    app.add_config_value("panels_delimiters", (".", "^", "+"), "env")
     app.connect("config-inited", validate_config)
-    app.add_config_value("add_boostrap_css", True, "env")
+    app.add_config_value("panels_add_boostrap_css", True, "env")
     app.connect("builder-inited", add_static_paths)
     # we override container html visitors,
     # to stop the default behaviour of adding the `container` class to all nodes
