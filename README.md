@@ -1,13 +1,13 @@
 # sphinx-panels
 
-[![Documentation Status][rtd-badge]][rtd-link]
+[![Doc Status][rtd-badge]][rtd-link]
 [![Code style: black][black-badge]][black-link]
 [![PyPI][pypi-badge]][pypi-link]
 
 A sphinx extension for creating panels in a grid layout.
 utilising both the bootstrap 4
-[grid system](https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp),
-and [cards layout](https://www.w3schools.com/bootstrap4/bootstrap_cards.asp).
+[grid system](https://getbootstrap.com/docs/4.0/layout/grid/),
+and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
 
 ```rst
 .. panels::

@@ -63,9 +63,7 @@ Usage
 =====
 
 In your ``conf.py`` configuration file, add ``sphinx_panels``
-to your extensions list.
-
-E.g.:
+to your extensions list, e.g.:
 
 .. code-block:: python
 
@@ -77,7 +75,7 @@ E.g.:
 
 This extension includes the bootstrap 4 CSS classes relevant to panels.
 They will be loaded by default but, if you are already using a bootstrap theme,
-you can disable it by adding ``add_boostrap_css = False`` to your ``conf.py``.
+you can disable this by adding ``add_boostrap_css = False`` to your ``conf.py``.
 
 Detailed Examples
 =================
@@ -267,8 +265,51 @@ but it is advised you use the built-in bootstrap classes:
     ..............
     panel 2 footer
 
-All Features
-------------
+
+Image Caps
+----------
+
+Images can be added to the top and/or bottom of the panel.
+By default they will expand to fit the width of the card,
+but classes can also be used to add padding:
+
+.. code-block:: rst
+
+    .. panels::
+        :img-top-cls: pl-5 pr-5
+
+        ---
+        img-top = _static/ebp-logo.png
+        img-bottom = _static/footer-banner.jpg
+
+        Panel 1 content
+
+        ---
+        img-top = _static/sphinx-logo.png
+        img-top-cls += bg-success
+        img-bottom = _static/footer-banner.jpg
+
+        Panel 2 content
+
+.. panels::
+    :img-top-cls: pl-5 pr-5
+
+    ---
+    img-top = _static/ebp-logo.png
+    img-bottom = _static/footer-banner.jpg
+
+    Panel 1 content
+
+    ---
+    img-top = _static/sphinx-logo.png
+    img-top-cls += bg-success
+    img-bottom = _static/footer-banner.jpg
+
+    Panel 2 content
+
+
+Additional Examples
+-------------------
 
 .. code-block:: rst
 

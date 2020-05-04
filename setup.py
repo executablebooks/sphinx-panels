@@ -38,5 +38,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Sphinx :: Extension",
     ],
-    keywords="sphinx html bootstrap",
+    keywords="sphinx html bootstrap grid card",
 )

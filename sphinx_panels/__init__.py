@@ -35,7 +35,10 @@ DEFAULT_CONTAINER = "container pb-4"
 DEFAULT_COLUMN = "col-lg-6 col-md-6 col-sm-6 col-xs-12"
 DEFAULT_CARD = "shadow"
 
-RE_OPTIONS = re.compile(r"(column|card|body|header|footer)\s*(\+?=)\s*(.*)")
+RE_OPTIONS = re.compile(
+    r"(column|card|body|header|footer|"
+    r"img-top|img-bottom|img-top-cls|img-bottom-cls)\s*(\+?=)\s*(.*)"
+)
 
 LOCAL_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
@@ -118,13 +121,16 @@ def parse_single_panel(
     body_start = 0
     body_end = len(content)
 
-    # parse the classes required for this panel
+    # parse the classes required for this panel, and top/bottom images
     classes = default_classes.copy()
     for opt_offset, line in enumerate(content):
         opt_match = RE_OPTIONS.match(line)
         if not opt_match:
             break
         body_start += 1
+        if opt_match.group(1) in ["img-top", "img-bottom"]:
+            output[opt_match.group(1)] = opt_match.group(3)
+            continue
         if opt_match.group(2) == "+=":
             classes[opt_match.group(1)] = (
                 classes.get(opt_match.group(1), []) + opt_match.group(3).split()
@@ -150,7 +156,6 @@ def parse_single_panel(
     body_content = content[body_start:body_end]
     body_offset = content_offset + offset + body_start
     output["body"] = (body_content, body_offset)
-
     return output
 
 
@@ -175,6 +180,8 @@ class Panels(SphinxDirective):
         "body": directives.unchanged,
         "header": directives.unchanged,
         "footer": directives.unchanged,
+        "img-top-cls": directives.unchanged,
+        "img-bottom-cls": directives.unchanged,
     }
 
     def run(self):
@@ -186,6 +193,8 @@ class Panels(SphinxDirective):
             "body": self.options.get("body", "").split(),
             "header": self.options.get("header", "").split(),
             "footer": self.options.get("footer", "").split(),
+            "img-top-cls": self.options.get("img-top-cls", "").split(),
+            "img-bottom-cls": self.options.get("img-bottom-cls", "").split(),
         }
 
         # split the block into panels
@@ -208,6 +217,16 @@ class Panels(SphinxDirective):
                 in_panel=True, classes=["card", "w-100"] + classes["card"]
             )
             column += card
+
+            if "img-top" in data:
+                image_top = nodes.image(
+                    "",
+                    uri=directives.uri(data["img-top"]),
+                    alt="img-top",
+                    classes=["card-img-top"] + classes["img-top-cls"],
+                )
+                self.add_name(image_top)
+                card += image_top
 
             if "header" in data:
                 header = nodes.container(
@@ -237,6 +256,16 @@ class Panels(SphinxDirective):
                 footer_content, footer_offset = data["footer"]
                 self.state.nested_parse(footer_content, footer_offset, footer)
                 add_child_classes(footer)
+
+            if "img-bottom" in data:
+                image_top = nodes.image(
+                    "",
+                    uri=directives.uri(data["img-bottom"]),
+                    alt="img-bottom",
+                    classes=["card-img-bottom"] + classes["img-bottom-cls"],
+                )
+                self.add_name(image_top)
+                card += image_top
 
         return [parent]
 
