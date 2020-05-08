@@ -290,11 +290,16 @@ def validate_config(app, config):
         )
     if len(set(app.config.panels_delimiters)) != 3:
         raise AssertionError("panels_delimiters config must contain unique values")
-    app.config.panels_delimiters = [re.compile(s) for s in app.config.panels_delimiters]
-    # if not (isinstance(delim, str):
-    #     raise AssertionError(
-    #         "panels_delimiters config must contain only strings"
-    #     )
+    try:
+        app.config.panels_delimiters = tuple(
+            [re.compile(s) for s in app.config.panels_delimiters]
+        )
+    except Exception as err:
+        raise AssertionError(
+            "panels_delimiters config must contain only compilable regexes: {}".format(
+                err
+            )
+        )
 
 
 def add_static_paths(app):
