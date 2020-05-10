@@ -1,10 +1,9 @@
 """"A small sphinx extension to add a ``panels`` directive.
 
-This directive creates panels of content in a 2 x N layout.
+This directive creates panels of content in an M x N layout.
 The panels are separated by `---`::
 
     .. panels::
-        :centred:
 
         Content of the top-left panel
 
@@ -21,7 +20,6 @@ The panels are separated by `---`::
         Content of the bottom-right panel
 
 The content can be any valid rST.
-`:centred:` indicates that the panel contents should be horizontally centred.
 """
 import os
 import re
@@ -29,15 +27,15 @@ from docutils import nodes
 from docutils.parsers.rst import directives
 from sphinx.util.docutils import SphinxDirective
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 DEFAULT_CONTAINER = "container pb-4"
-DEFAULT_COLUMN = "col-lg-6 col-md-6 col-sm-6 col-xs-12"
+DEFAULT_COLUMN = "col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2"
 DEFAULT_CARD = "shadow"
 
 RE_OPTIONS = re.compile(
-    r"(column|card|body|header|footer|"
-    r"img-top|img-bottom|img-top-cls|img-bottom-cls)\s*(\+?=)\s*(.*)"
+    r"\:(column|card|body|header|footer|"
+    r"img-top|img-bottom|img-top-cls|img-bottom-cls)\:\s*(\+?)\s*(.*)"
 )
 
 LOCAL_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -47,16 +45,11 @@ def parse_panels(
     content,
     content_offset,
     default_classes,
-    panel_char=".",
-    head_char="^",
-    foot_char="+",
+    panel_regex=None,
+    head_regex=None,
+    foot_regex=None,
 ):
     """split a block of content into panels.
-
-    - each panel is split by ``---``
-    - an initial ``---`` before the first panel is optional
-    - within each panel, the content can be further split into a header (before ``===``)
-      and footer (after ``...``)
 
     example::
 
@@ -70,6 +63,10 @@ def parse_panels(
         next panel
 
     """
+    panel_regex = panel_regex or re.compile(r"^\-{3,}$")
+    head_regex = head_regex or re.compile(r"^\^{3,}$")
+    foot_regex = foot_regex or re.compile(r"^\+{3,}$")
+
     if isinstance(content, str):
         content = content.splitlines()
 
@@ -77,7 +74,7 @@ def parse_panels(
     start_line = 0
     header_split = footer_split = None
     for i, line in enumerate(content):
-        if line.startswith(panel_char * 3):
+        if panel_regex.match(line.strip()):
             if i != 0:
                 panel_blocks.append(
                     parse_single_panel(
@@ -91,9 +88,9 @@ def parse_panels(
                 )
             start_line = i + 1
             header_split = footer_split = None
-        if line.startswith(head_char * 3) and footer_split is None:
+        if head_regex.match(line.strip()) and footer_split is None:
             header_split = i - start_line
-        if line.startswith(foot_char * 3):
+        if foot_regex.match(line.strip()):
             footer_split = i - start_line
         # TODO warn if multiple header_split or footer_split
         # TODO assert header_split is before footer_split
@@ -131,7 +128,7 @@ def parse_single_panel(
         if opt_match.group(1) in ["img-top", "img-bottom"]:
             output[opt_match.group(1)] = opt_match.group(3)
             continue
-        if opt_match.group(2) == "+=":
+        if opt_match.group(2) == "+":
             classes[opt_match.group(1)] = (
                 classes.get(opt_match.group(1), []) + opt_match.group(3).split()
             )
@@ -185,30 +182,39 @@ class Panels(SphinxDirective):
     }
 
     def run(self):
-
-        container_classes = self.options.get("container", DEFAULT_CONTAINER).split()
         default_classes = {
-            "column": self.options.get("column", DEFAULT_COLUMN).split(),
-            "card": self.options.get("card", DEFAULT_CARD).split(),
-            "body": self.options.get("body", "").split(),
-            "header": self.options.get("header", "").split(),
-            "footer": self.options.get("footer", "").split(),
-            "img-top-cls": self.options.get("img-top-cls", "").split(),
-            "img-bottom-cls": self.options.get("img-bottom-cls", "").split(),
+            "container": DEFAULT_CONTAINER.split(),
+            "column": DEFAULT_COLUMN.split(),
+            "card": DEFAULT_CARD.split(),
+            "body": [],
+            "header": [],
+            "footer": [],
+            "img-top-cls": [],
+            "img-bottom-cls": [],
         }
+
+        # set classes from the directive options
+        for key, value in default_classes.items():
+            if key not in self.options:
+                continue
+            option_value = self.options[key].strip()
+            if option_value.startswith("+"):
+                default_classes[key] += option_value[1:].split()
+            else:
+                default_classes[key] = option_value.split()
 
         # split the block into panels
         panel_blocks = parse_panels(
             self.content,
             self.content_offset,
             default_classes,
-            panel_char=self.env.app.config.panels_delimiters[0],
-            head_char=self.env.app.config.panels_delimiters[1],
-            foot_char=self.env.app.config.panels_delimiters[2],
+            panel_regex=self.env.app.config.panels_delimiters[0],
+            head_regex=self.env.app.config.panels_delimiters[1],
+            foot_regex=self.env.app.config.panels_delimiters[2],
         )
 
         # set the top-level containers
-        parent = nodes.container(in_panel=True, classes=container_classes)
+        parent = nodes.container(in_panel=True, classes=default_classes["container"])
         rows = nodes.container(in_panel=True, classes=["row"])
         parent += rows
 
@@ -284,11 +290,16 @@ def validate_config(app, config):
         )
     if len(set(app.config.panels_delimiters)) != 3:
         raise AssertionError("panels_delimiters config must contain unique values")
-    for delim in app.config.panels_delimiters:
-        if not (isinstance(delim, str) and len(delim) == 1):
-            raise AssertionError(
-                "panels_delimiters config must contain only length 1 strings"
+    try:
+        app.config.panels_delimiters = tuple(
+            [re.compile(s) for s in app.config.panels_delimiters]
+        )
+    except Exception as err:
+        raise AssertionError(
+            "panels_delimiters config must contain only compilable regexes: {}".format(
+                err
             )
+        )
 
 
 def add_static_paths(app):
@@ -313,7 +324,9 @@ def depart_container(self, node):
 
 def setup(app):
     app.add_directive("panels", Panels)
-    app.add_config_value("panels_delimiters", (".", "^", "+"), "env")
+    app.add_config_value(
+        "panels_delimiters", (r"^\-{3,}$", r"^\^{3,}$", r"^\+{3,}$"), "env"
+    )
     app.connect("config-inited", validate_config)
     app.add_config_value("panels_add_boostrap_css", True, "env")
     app.connect("builder-inited", add_static_paths)
@@ -323,4 +336,8 @@ def setup(app):
         nodes.container, override=True, html=(visit_container, depart_container)
     )
 
-    return {"version": "0.1", "parallel_read_safe": True, "parallel_write_safe": True}
+    return {
+        "version": __version__,
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
