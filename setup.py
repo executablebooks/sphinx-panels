@@ -24,7 +24,12 @@ setup(
     license="MIT",
     packages=find_packages(),
     package_data={
-        "sphinx_panels": ["css/bs-cards.css", "css/bs-grids.css", "css/bs-borders.css"]
+        "sphinx_panels": [
+            "css/bs-cards.css",
+            "css/bs-grids.css",
+            "css/bs-borders.css",
+            "css/bs-buttons.css",
+        ]
     },
     install_requires=["docutils", "sphinx"],
     extras_require={
