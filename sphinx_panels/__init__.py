@@ -23,8 +23,11 @@ The content can be any valid rST.
 """
 import os
 import re
+from urllib.parse import unquote
+
 from docutils import nodes
 from docutils.parsers.rst import directives
+from sphinx import addnodes
 from sphinx.util.docutils import SphinxDirective
 
 __version__ = "0.3.0"
@@ -308,6 +311,7 @@ def add_static_paths(app):
         app.add_css_file("bs-grids.css")
         app.add_css_file("bs-cards.css")
         app.add_css_file("bs-borders.css")
+        app.add_css_file("bs-buttons.css")
 
 
 def visit_container(self, node):
@@ -320,6 +324,55 @@ def visit_container(self, node):
 
 def depart_container(self, node):
     self.body.append("</div>\n")
+
+
+class LinkButton(SphinxDirective):
+    """A directive to turn a link into a button."""
+
+    has_content = False
+    required_arguments = 1
+    option_spec = {
+        "type": lambda arg: directives.choice(arg, ("url", "ref")),
+        "text": directives.unchanged,
+        "tooltip": directives.unchanged,
+        "classes": directives.unchanged,
+    }
+
+    def run(self):
+
+        uri = self.arguments[0]
+        link_type = self.options.get("type", "url")
+
+        text = self.options.get("text", uri)
+        innernode = nodes.inline("", text)
+
+        if link_type == "ref":
+            ref_node = addnodes.pending_xref(
+                reftarget=unquote(uri),
+                reftype="any",
+                # refdoc=self.env.docname,
+                refdomain="",
+                refexplicit=True,
+                refwarn=True,
+            )
+            innernode["classes"] = ["xref", "any"]
+            if "tooltip" in self.options:
+                ref_node["title"] = self.options["tooltip"]
+        else:
+            ref_node = nodes.reference()
+            ref_node["refuri"] = uri
+            if "tooltip" in self.options:
+                ref_node["reftitle"] = self.options["tooltip"]
+
+        self.set_source_info(ref_node)
+
+        ref_node["classes"] = ["btn"] + self.options.get("classes", "").split()
+        ref_node += innernode
+        # sphinx requires that a reference be inside a block element
+        container = nodes.paragraph()
+        container += ref_node
+
+        return [container]
 
 
 def setup(app):
@@ -335,6 +388,7 @@ def setup(app):
     app.add_node(
         nodes.container, override=True, html=(visit_container, depart_container)
     )
+    app.add_directive("link-button", LinkButton)
 
     return {
         "version": __version__,

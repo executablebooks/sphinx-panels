@@ -58,6 +58,7 @@ You can install `sphinx-panels` with `pip`:
 
     pip install sphinx-panels
 
+.. _panels/usage:
 
 Usage
 =====
@@ -365,6 +366,71 @@ but classes can also be used to add padding:
 
     ++++++
     tail 1
+
+Button Links
+============
+
+The ``link-button`` directive can be used to create a button, which links to a URL (default) or reference.
+They can be styled by `Bootstrap button classes <https://getbootstrap.com/docs/4.0/components/buttons/>`_:
+
+.. code-block:: rst
+
+    .. link-button:: https://example.com
+        :type: url
+        :text: some text
+        :tooltip: hallo
+
+    .. link-button:: panels/usage
+        :type: ref
+        :text: some other text
+        :classes: btn-outline-primary btn-block
+
+.. link-button:: https://example.com
+    :type: url
+    :text: some text
+    :tooltip: hallo
+
+.. link-button:: panels/usage
+    :type: ref
+    :text: some other text
+    :classes: btn-outline-primary btn-block
+
+When used inside a panel, you can use the `stretched-link class <https://getbootstrap.com/docs/4.4/utilities/stretched-link/>`_,
+to make the entire panel clickable:
+
+.. code-block:: rst
+
+    .. panels::
+
+        .. link-button:: https://example.com
+            :classes: btn-success
+
+        ---
+
+        This entire panel is clickable.
+
+        +++
+
+        .. link-button:: panels/usage
+            :type: ref
+            :text: Go To Reference
+            :classes: btn-outline-primary btn-block stretched-link
+
+.. panels::
+
+    .. link-button:: https://example.com
+        :classes: btn-success
+
+    ---
+
+    This entire panel is clickable.
+
+    +++
+
+    .. link-button:: panels/usage
+        :type: ref
+        :text: Go To Reference
+        :classes: btn-outline-primary btn-block stretched-link
 
 Additional Examples
 -------------------
