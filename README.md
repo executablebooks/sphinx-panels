@@ -28,7 +28,7 @@ and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
 ```
 
 Also, the `link-button` directive can be used to create buttons, which link to a URL (default) or reference.
-They can be styled by `Bootstrap button classes <https://getbootstrap.com/docs/4.0/components/buttons/>`_:
+They can be styled by [Bootstrap button classes](https://getbootstrap.com/docs/4.0/components/buttons/):
 
 ```rst
 .. panels::
