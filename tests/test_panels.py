@@ -1,6 +1,6 @@
 import pytest
 
-from sphinx_panels import parse_panels
+from sphinx_panels.panels import parse_panels
 
 
 @pytest.mark.parametrize(

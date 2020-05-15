@@ -1,0 +1,53 @@
+details.dropdown .summary-title {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    /* don't overlap the chevron */
+    padding-right: 3em!important;
+  }
+details.dropdown:hover {
+    cursor: pointer;
+}
+details.dropdown .summary-content {
+    cursor: default;
+}
+details.dropdown summary {
+    padding: 1em;
+    /* hide the default triangle marker */
+    list-style: none;
+}
+/* chrome doesn't yet support list-style */
+details.dropdown summary::-webkit-details-marker {
+    display: none;
+}
+details.dropdown summary:focus {
+    outline: none;
+}
+details.dropdown summary:hover .summary-chevron-up svg,
+details.dropdown summary:hover .summary-chevron-down svg {
+    opacity: 1;
+}
+details.dropdown .summary-chevron-up svg,
+details.dropdown .summary-chevron-down svg {
+    opacity: 0.6;
+}
+details.dropdown .summary-chevron-up,
+details.dropdown .summary-chevron-down {
+    pointer-events: none;
+    position: absolute;
+    top: 0.75em;
+    right: 1em;
+}
+details.dropdown .summary-chevron-up svg,
+details.dropdown .summary-chevron-down svg {
+    display: block;
+}
+details.dropdown[open] .summary-chevron-up{
+    visibility: hidden;
+    /* z-index: -1; */
+}
+details.dropdown:not([open]) .summary-chevron-down{
+    visibility: hidden;
+    /* z-index: -1; */
+}

@@ -27,7 +27,7 @@ and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
     Content of the bottom-right panel
 ```
 
-Also, the `link-button` directive can be used to create buttons, which link to a URL (default) or reference.
+The `link-button` directive can be used to create buttons, which link to a URL (default) or reference.
 They can be styled by [Bootstrap button classes](https://getbootstrap.com/docs/4.0/components/buttons/):
 
 ```rst
@@ -48,6 +48,20 @@ They can be styled by [Bootstrap button classes](https://getbootstrap.com/docs/4
         :type: ref
         :text: Go To Reference
         :classes: btn-outline-primary btn-block stretched-link
+```
+
+The `dropdown` directive combines a [Bootstrap card](https://getbootstrap.com/docs/4.0/components/card/)
+with the [HTML details tag](https://www.w3schools.com/tags/tag_details.asp) to create a collapsible
+drop-down panel.
+
+```rst
+.. dropdown:: Click on me to see my content!
+
+    I'm the content which can be anything:
+
+    .. link-button:: https://example.com
+        :text: Like a Button
+        :classes: btn-primary
 ```
 
 [rtd-badge]: https://readthedocs.org/projects/sphinx-panels/badge/?version=latest

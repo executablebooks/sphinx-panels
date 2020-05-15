@@ -29,6 +29,7 @@ setup(
             "css/bs-grids.css",
             "css/bs-borders.css",
             "css/bs-buttons.css",
+            "css/sphinx-dropdown.css",
         ]
     },
     install_requires=["docutils", "sphinx"],

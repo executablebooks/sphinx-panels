@@ -2,6 +2,12 @@
 sphinx-panels
 =============
 
+.. contents::
+    :local:
+    :depth: 2
+
+
+
 A sphinx extension for creating panels in a grid layout.
 
 This directive creates panels of content in a grid layout,
@@ -432,6 +438,64 @@ to make the entire panel clickable:
         :text: Go To Reference
         :classes: btn-outline-primary btn-block stretched-link
 
+
+Dropdown Panels
+===============
+
+The ``dropdown`` directive combines a `Bootstrap card <https://getbootstrap.com/docs/4.0/components/card/>`_
+with the `HTML details tag <https://www.w3schools.com/tags/tag_details.asp>`_ to create a collapsible
+drop-down panel.
+
+.. code-block:: rst
+
+    .. dropdown:: Click on me to see my content!
+
+        I'm the content which can be anything:
+
+        .. link-button:: https://example.com
+            :text: Like a Button
+            :classes: btn-primary
+
+.. dropdown:: Click on me to see my content!
+
+    I'm the content which can be anything:
+
+    .. link-button:: https://example.com
+        :text: Like a Button
+        :classes: btn-primary
+
+You can start with the panel open by default using the ``open`` option:
+
+.. code-block:: rst
+
+    .. dropdown:: My Content
+        :open:
+
+        Is already visible
+
+.. dropdown:: My Content
+    :open:
+
+    Is already visible
+
+The overarching container, title banner and body panel can all be styled by assigning classes:
+
+.. code-block:: rst
+
+    .. dropdown:: My Content
+        :container: mb-3 shadow
+        :title: bg-primary text-white text-center font-weight-bold
+        :body: bg-light text-right font-italic
+
+        Is formatted
+
+.. dropdown:: My Content
+    :container: mb-3 shadow
+    :title: bg-primary text-white text-center font-weight-bold
+    :body: bg-light text-right font-italic
+
+    Is formatted
+
 Additional Examples
 ===================
 
@@ -513,4 +577,5 @@ Additional Examples
 Acknowledgements
 ================
 
-Originally adapted from the `pandas documentation <https://pandas.pydata.org/docs/>`_.
+- Panels originally adapted from the `pandas documentation <https://pandas.pydata.org/docs/>`_.
+- Dropdown originally adapted from `tk0miya/sphinxcontrib-details-directive  <https://github.com/tk0miya/sphinxcontrib-details-directive/>`_.
