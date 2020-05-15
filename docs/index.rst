@@ -367,7 +367,7 @@ but classes can also be used to add padding:
     ++++++
     tail 1
 
-Button Links
+Link Buttons
 ============
 
 The ``link-button`` directive can be used to create a button, which links to a URL (default) or reference.
@@ -433,7 +433,7 @@ to make the entire panel clickable:
         :classes: btn-outline-primary btn-block stretched-link
 
 Additional Examples
--------------------
+===================
 
 .. code-block:: rst
 
