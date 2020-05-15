@@ -27,6 +27,29 @@ and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
     Content of the bottom-right panel
 ```
 
+Also, the `link-button` directive can be used to create buttons, which link to a URL (default) or reference.
+They can be styled by `Bootstrap button classes <https://getbootstrap.com/docs/4.0/components/buttons/>`_:
+
+```rst
+.. panels::
+
+    .. link-button:: https://example.com
+        :type: url
+        :tooltip: hallo
+        :classes: btn-success
+
+    ---
+
+    This entire panel is clickable.
+
+    +++
+
+    .. link-button:: panels/usage
+        :type: ref
+        :text: Go To Reference
+        :classes: btn-outline-primary btn-block stretched-link
+```
+
 [rtd-badge]: https://readthedocs.org/projects/sphinx-panels/badge/?version=latest
 [rtd-link]: https://sphinx-panels.readthedocs.io/en/latest/?badge=latest
 [black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg

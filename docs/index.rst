@@ -370,7 +370,7 @@ but classes can also be used to add padding:
 Link Buttons
 ============
 
-The ``link-button`` directive can be used to create a button, which links to a URL (default) or reference.
+The ``link-button`` directive can be used to create buttons, which link to a URL (default) or reference.
 They can be styled by `Bootstrap button classes <https://getbootstrap.com/docs/4.0/components/buttons/>`_:
 
 .. code-block:: rst
