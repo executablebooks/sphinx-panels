@@ -30,7 +30,7 @@ from docutils.parsers.rst import directives
 from sphinx import addnodes
 from sphinx.util.docutils import SphinxDirective
 
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 DEFAULT_CONTAINER = "container pb-4"
 DEFAULT_COLUMN = "col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2"
