@@ -520,13 +520,62 @@ Adding the `fade-in` option will cause the content of the drop-down to fade-in w
     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
-Additional Examples
-===================
+Combined Example
+================
 
 .. code-block:: rst
 
+    .. dropdown:: Panels in a drop-down
+        :title: bg-success
+        :open:
+        :fade-in:
+
+        .. panels::
+            :container: container-fluid pb-1
+            :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
+            :card: shadow
+            :header: border-0
+            :footer: border-0
+
+            ---
+            :card: + bg-warning
+
+            header
+            ^^^^^^
+
+            Content of the top-left panel
+
+            ++++++
+            footer
+
+            ---
+            :card: + bg-info
+            :footer: + bg-danger
+
+            header
+            ^^^^^^
+
+            Content of the top-right panel
+
+            ++++++
+            footer
+
+            ---
+            :column: col-lg-12 p-3
+            :card: + text-center
+
+            .. link-button:: panels/usage
+                :type: ref
+                :text: Clickable Panel
+                :classes: btn-link stretched-link font-weight-bold
+
+.. dropdown:: Panels in a drop-down
+    :title: bg-success
+    :open:
+    :fade-in:
+
     .. panels::
-        :container: container-fluid pb-3
+        :container: container-fluid pb-1
         :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
         :card: shadow
         :header: border-0
@@ -557,46 +606,13 @@ Additional Examples
 
         ---
         :column: col-lg-12 p-3
-        :card: + bg-success text-center
+        :card: + text-center
 
-        Content of the bottom panel
+        .. link-button:: panels/usage
+            :type: ref
+            :text: Clickable Panel
+            :classes: btn-link stretched-link font-weight-bold
 
-
-.. panels::
-    :container: container-fluid pb-3
-    :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
-    :card: shadow
-    :header: border-0
-    :footer: border-0
-
-    ---
-    :card: + bg-warning
-
-    header
-    ^^^^^^
-
-    Content of the top-left panel
-
-    ++++++
-    footer
-
-    ---
-    :card: + bg-info
-    :footer: + bg-danger
-
-    header
-    ^^^^^^
-
-    Content of the top-right panel
-
-    ++++++
-    footer
-
-    ---
-    :column: col-lg-12 p-3
-    :card: + bg-success text-center
-
-    Content of the bottom panel
 
 Acknowledgements
 ================
