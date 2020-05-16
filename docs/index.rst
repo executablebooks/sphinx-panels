@@ -7,12 +7,14 @@ sphinx-panels
     :depth: 2
 
 
-A sphinx extension for creating panels in a grid layout.
+A sphinx extension for creating panels in a grid layout or as drop-downs.
 
-This directive creates panels of content in a grid layout,
-utilising both the bootstrap 4
-`grid system <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
-and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
+- The ``panels`` directive creates panels of content in a grid layout, utilising both the bootstrap 4
+  `grid system <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
+  and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
+- The ``link-button`` directive creates a click-able button, linking to a URL or reference,
+  and can also be used to make an entire panel click-able.
+- The ``dropdown`` directive creates toggle-able content.
 
 .. code-block:: rst
 
@@ -26,11 +28,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
         ---
 
-        Content of the bottom-left panel
+        .. dropdown:: Bottom-left panel
+
+            Hidden content
 
         ---
 
-        Content of the bottom-right panel
+        .. link-button:: https://example.com
+            :text: Clickable Panel
+            :classes: stretched-link
 
 .. panels::
 
@@ -42,11 +48,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
     ---
 
-    Content of the bottom-left panel
+    .. dropdown:: Bottom-left panel
+
+        Hidden content
 
     ---
 
-    Content of the bottom-right panel
+    .. link-button:: https://example.com
+        :text: Clickable Panel
+        :classes: stretched-link
 
 .. tip::
 
@@ -65,10 +75,10 @@ You can install `sphinx-panels` with `pip`:
 
 .. _panels/usage:
 
-Usage
-=====
+Sphinx Configuration
+=====================
 
-In your ``conf.py`` configuration file, add ``sphinx_panels``
+In your ``conf.py`` configuration file, simply add ``sphinx_panels``
 to your extensions list, e.g.:
 
 .. code-block:: python
@@ -91,8 +101,8 @@ e.g. the default value (panels, header, footer) is:
     panels_delimiters = (r"^\-{3,}$", r"^\^{3,}$", r"^\+{3,}$")
 
 
-Detailed Examples
-=================
+Panels Usage
+============
 
 Grid Layout
 -----------
@@ -438,8 +448,8 @@ to make the entire panel clickable:
         :classes: btn-outline-primary btn-block stretched-link
 
 
-Dropdown Panels
-===============
+Dropdown Usage
+==============
 
 The ``dropdown`` directive combines a `Bootstrap card <https://getbootstrap.com/docs/4.0/components/card/>`_
 with the `HTML details tag <https://www.w3schools.com/tags/tag_details.asp>`_ to create a collapsible
