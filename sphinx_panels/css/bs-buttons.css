@@ -672,3 +672,6 @@
     content:"";
     background-color:rgba(0,0,0,0)
    }
+   .text-wrap {
+    white-space: normal !important;
+    }

@@ -50,7 +50,9 @@ class LinkButton(SphinxDirective):
 
         self.set_source_info(ref_node)
 
-        ref_node["classes"] = ["btn"] + self.options.get("classes", "").split()
+        ref_node["classes"] = ["btn", "text-wrap"] + self.options.get(
+            "classes", ""
+        ).split()
         ref_node += innernode
         # sphinx requires that a reference be inside a block element
         container = nodes.paragraph()
