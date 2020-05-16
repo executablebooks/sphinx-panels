@@ -7,7 +7,6 @@ sphinx-panels
     :depth: 2
 
 
-
 A sphinx extension for creating panels in a grid layout.
 
 This directive creates panels of content in a grid layout,
@@ -478,23 +477,48 @@ You can start with the panel open by default using the ``open`` option:
 
     Is already visible
 
-The overarching container, title banner and body panel can all be styled by assigning classes:
+The overarching container, title banner and body panel can all be styled by assigning classes.
+Adding `+` at the start appends the classes to any default ones.
 
 .. code-block:: rst
 
     .. dropdown:: My Content
-        :container: mb-3 shadow
+        :container: + shadow
         :title: bg-primary text-white text-center font-weight-bold
         :body: bg-light text-right font-italic
 
         Is formatted
 
 .. dropdown:: My Content
-    :container: mb-3 shadow
+    :container: + shadow
     :title: bg-primary text-white text-center font-weight-bold
     :body: bg-light text-right font-italic
 
     Is formatted
+
+Transition Animation
+--------------------
+
+Adding the `fade-in` option will cause the content of the drop-down to fade-in when opened.
+
+.. code-block:: rst
+
+    .. dropdown:: My content will fade in
+        :fade-in:
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.. dropdown:: My content will fade in
+    :fade-in:
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
 
 Additional Examples
 ===================

@@ -52,19 +52,40 @@ class DropdownDirective(SphinxDirective):
         "open": directives.flag,
         "marker-color": directives.unchanged,
         "name": directives.unchanged,
+        "fade-in": directives.flag,
     }
 
     def run(self):
 
+        # default classes
+        classes = {
+            "container_classes": ["mb-3"],
+            "title_classes": [],
+            "body_classes": [],
+        }
+
+        # add classes from options
+        for element in ["container", "title", "body"]:
+            if element not in self.options:
+                continue
+            value = self.options.get(element).strip()
+            if value.startswith("+"):
+                classes.setdefault(element + "_classes", []).extend(value[1:].split())
+            else:
+                classes[element + "_classes"] = value.split()
+
+        # add animation classes
+        if "fade-in" in self.options and "fade-in" not in classes["container_classes"]:
+            classes["container_classes"].append("fade-in")
+
         container = nodes.container(
             "",
-            container_classes=self.options.get("container", "mb-3").split(),
-            title_classes=self.options.get("title", "").split(),
-            body_classes=self.options.get("body", "").split(),
             marker_color=self.options.get("marker-color", "currentColor"),
             opened="open" in self.options,
             type="dropdown",
+            **classes
         )
+
         textnodes, messages = self.state.inline_text(self.arguments[0], self.lineno)
         container += nodes.paragraph(self.arguments[0], "", *textnodes)
         container += messages

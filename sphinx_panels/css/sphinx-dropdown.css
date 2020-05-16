@@ -51,3 +51,19 @@ details.dropdown:not([open]) .summary-chevron-down{
     visibility: hidden;
     /* z-index: -1; */
 }
+/* Transition animation */
+details.dropdown.fade-in[open] summary ~ * {
+    animation: fade-in .5s ease-in-out;
+    -moz-animation: fade-in .5s ease-in-out ;
+    -webkit-animation: fade-in .5s ease-in-out
+}
+@keyframes fade-in {
+    0%    {
+        opacity: 0;
+        transform: translate(0px, -10px)
+    }
+    100%  {
+        opacity: 1;
+        transform: translate(0px, 0px)
+    }
+}
