@@ -51,6 +51,9 @@ details.dropdown:not([open]) .summary-chevron-down{
     visibility: hidden;
     /* z-index: -1; */
 }
+details.dropdown[open] .ellipsis{
+    visibility: hidden;
+}
 /* Transition animation */
 details.dropdown.fade-in[open] summary ~ * {
     animation: fade-in .5s ease-in-out;

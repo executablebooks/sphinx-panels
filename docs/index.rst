@@ -487,6 +487,18 @@ You can start with the panel open by default using the ``open`` option:
 
     Is already visible
 
+If the drop-down has no title assigned, it will display an ellipsis, which is hidden when open:
+
+.. code-block:: rst
+
+    .. dropdown::
+
+        My Content
+
+.. dropdown::
+
+    My Content
+
 The overarching container, title banner and body panel can all be styled by assigning classes.
 Adding `+` at the start appends the classes to any default ones.
 

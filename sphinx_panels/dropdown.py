@@ -42,7 +42,7 @@ def depart_dropdown_title(self, node):
 
 
 class DropdownDirective(SphinxDirective):
-    required_arguments = 1
+    optional_arguments = 1
     final_argument_whitespace = True
     has_content = True
     option_spec = {
@@ -86,12 +86,13 @@ class DropdownDirective(SphinxDirective):
             marker_color=self.options.get("marker-color", "currentColor"),
             opened="open" in self.options,
             type="dropdown",
+            has_title=len(self.arguments) > 0,
             **classes
         )
-
-        textnodes, messages = self.state.inline_text(self.arguments[0], self.lineno)
-        container += nodes.paragraph(self.arguments[0], "", *textnodes)
-        container += messages
+        if self.arguments:
+            textnodes, messages = self.state.inline_text(self.arguments[0], self.lineno)
+            container += nodes.paragraph(self.arguments[0], "", *textnodes)
+            container += messages
         self.state.nested_parse(self.content, self.content_offset, container)
         self.add_name(container)
         return [container]
@@ -103,6 +104,16 @@ CHEVRON = """\
     stroke="{color}" stroke-width="2"stroke-linecap="round" stroke-linejoin="round"
 >
 <polyline points="{points}"></polyline>
+</svg>"""
+
+ELLIPSIS = """\
+<svg viewBox="0 0 36 24" width="36" height="16" xmlns="http://www.w3.org/2000/svg"
+    data-icon="ui-components:ellipses" class="ellipsis">
+  <g xmlns="http://www.w3.org/2000/svg" class="jp-icon3" fill="currentColor">
+    <circle cx="0" cy="12" r="6"></circle>
+    <circle cx="18" cy="12" r="6"></circle>
+    <circle cx="36" cy="12" r="6"></circle>
+  </g>
 </svg>"""
 
 
@@ -147,17 +158,25 @@ class DropdownHtmlTransform(SphinxPostTransform):
                 opened=node["opened"],
                 classes=["dropdown", "card"] + node["container_classes"],
             )
+
+            if node["has_title"]:
+                title_children = node[0]
+                body_children = node[1:]
+            else:
+                title_children = [nodes.raw("...", nodes.Text(ELLIPSIS), format="html")]
+                body_children = node
+
             newnode += dropdown_title(
                 "",
                 "",
-                *node[0],
+                *title_children,
                 closed_marker,
                 open_marker,
                 classes=["summary-title", "card-header"] + node["title_classes"]
             )
             body_node = nodes.container(
                 "",
-                *node[1:],
+                *body_children,
                 is_div=True,
                 classes=["summary-content", "card-body"] + node["body_classes"]
             )
