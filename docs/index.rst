@@ -509,12 +509,12 @@ Adding `+` at the start appends the classes to any default ones.
 Transition Animation
 --------------------
 
-Adding the `fade-in` option will cause the content of the drop-down to fade-in when opened.
+Adding the `animate` option will trigger an animation when the content of the drop-down is opened.
 
 .. code-block:: rst
 
     .. dropdown:: My content will fade in
-        :fade-in:
+        :animate: fade-in
 
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -522,13 +522,24 @@ Adding the `fade-in` option will cause the content of the drop-down to fade-in w
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 .. dropdown:: My content will fade in
-    :fade-in:
+    :animate: fade-in
 
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+.. dropdown:: My content will fade in and slide down
+    :animate: fade-in-slide-down
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.. note::
+
+    Current available inputs: ``fade-in``, ``fade-in-slide-down``
 
 Combined Example
 ================
@@ -538,7 +549,7 @@ Combined Example
     .. dropdown:: Panels in a drop-down
         :title: bg-success
         :open:
-        :fade-in:
+        :animate: fade-in-slide-down
 
         .. panels::
             :container: container-fluid pb-1
@@ -582,7 +593,7 @@ Combined Example
 .. dropdown:: Panels in a drop-down
     :title: bg-success
     :open:
-    :fade-in:
+    :animate: fade-in-slide-down
 
     .. panels::
         :container: container-fluid pb-1

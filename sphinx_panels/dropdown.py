@@ -52,7 +52,7 @@ class DropdownDirective(SphinxDirective):
         "open": directives.flag,
         "marker-color": directives.unchanged,
         "name": directives.unchanged,
-        "fade-in": directives.flag,
+        "animate": lambda a: directives.choice(a, ("fade-in", "fade-in-slide-down")),
     }
 
     def run(self):
@@ -75,8 +75,11 @@ class DropdownDirective(SphinxDirective):
                 classes[element + "_classes"] = value.split()
 
         # add animation classes
-        if "fade-in" in self.options and "fade-in" not in classes["container_classes"]:
-            classes["container_classes"].append("fade-in")
+        if (
+            "animate" in self.options
+            and self.options["animate"] not in classes["container_classes"]
+        ):
+            classes["container_classes"].append(self.options["animate"])
 
         container = nodes.container(
             "",
