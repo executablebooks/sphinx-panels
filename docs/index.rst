@@ -547,7 +547,7 @@ Combined Example
 .. code-block:: rst
 
     .. dropdown:: Panels in a drop-down
-        :title: bg-success text-white
+        :title: bg-success text-warning
         :open:
         :animate: fade-in-slide-down
 
@@ -591,7 +591,7 @@ Combined Example
                 :classes: btn-link stretched-link font-weight-bold
 
 .. dropdown:: Panels in a drop-down
-    :title: bg-success text-white
+    :title: bg-success text-warning
     :open:
     :animate: fade-in-slide-down
 
