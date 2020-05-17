@@ -50,5 +50,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Sphinx :: Extension",
     ],
-    keywords="sphinx html bootstrap grid card",
+    keywords="sphinx html bootstrap grid card dropdown button badge",
 )
