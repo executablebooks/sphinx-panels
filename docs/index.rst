@@ -509,7 +509,7 @@ Adding `+` at the start appends the classes to any default ones.
 Transition Animation
 --------------------
 
-Adding the `animate` option will trigger an animation when the content of the drop-down is opened.
+Adding the ``animate`` option will trigger an animation when the content of the drop-down is opened.
 
 .. code-block:: rst
 
