@@ -195,7 +195,9 @@ class Panels(SphinxDirective):
         )
 
         # set the top-level containers
-        parent = nodes.container(is_div=True, classes=default_classes["container"])
+        parent = nodes.container(
+            is_div=True, classes=["sphinx-bs"] + default_classes["container"]
+        )
         rows = nodes.container(is_div=True, classes=["row"])
         parent += rows
 

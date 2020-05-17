@@ -17,10 +17,7 @@ def add_static_paths(app):
     app.config.html_static_path.append(os.path.join(LOCAL_FOLDER, "css"))
     app.add_css_file("sphinx-dropdown.css")
     if app.config.panels_add_boostrap_css:
-        app.add_css_file("bs-grids.css")
-        app.add_css_file("bs-cards.css")
-        app.add_css_file("bs-borders.css")
-        app.add_css_file("bs-buttons.css")
+        app.add_css_file("panels-bootstrap.min.css")
 
 
 def visit_container(self, node):
