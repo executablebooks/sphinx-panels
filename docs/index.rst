@@ -58,6 +58,16 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
         :text: Clickable Panel
         :classes: stretched-link
 
+.. dropdown:: See this documentation in other themes...
+    :title: bg-info text-white
+
+    Click the links to see the documentation built with:
+
+    - `alabaster <https://sphinx-panels.readthedocs.io/en/alabaster-theme/>`_
+    - `sphinx-pydata-theme <https://sphinx-panels.readthedocs.io/en/pydata-theme/>`_
+    - `sphinx-book-theme <https://sphinx-panels.readthedocs.io/en/sphinx-book-theme/>`_
+
+
 .. tip::
 
     Try shrinking the size of this window,
