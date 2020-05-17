@@ -119,7 +119,7 @@ ELLIPSIS = """\
 
 class DropdownHtmlTransform(SphinxPostTransform):
     default_priority = 200
-    builders = ("html", "dirhtml", "singlehtml")
+    builders = ("html", "dirhtml", "singlehtml", "readthedocs")
 
     def run(self):
         matcher = NodeMatcher(nodes.container, type="dropdown")
