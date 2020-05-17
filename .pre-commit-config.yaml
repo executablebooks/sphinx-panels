@@ -35,4 +35,4 @@ repos:
       language: system
       types: ["file", "text"]
       files: "bs-.*\\.css$"
-      args: []
+      pass_filenames: false
