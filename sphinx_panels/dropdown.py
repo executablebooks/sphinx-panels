@@ -156,7 +156,7 @@ class DropdownHtmlTransform(SphinxPostTransform):
 
             newnode = dropdown_main(
                 opened=node["opened"],
-                classes=["dropdown", "card"] + node["container_classes"],
+                classes=["sphinx-bs", "dropdown", "card"] + node["container_classes"],
             )
 
             if node["has_title"]:
