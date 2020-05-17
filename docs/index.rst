@@ -2,12 +2,19 @@
 sphinx-panels
 =============
 
-A sphinx extension for creating panels in a grid layout.
+.. contents::
+    :local:
+    :depth: 2
 
-This directive creates panels of content in a grid layout,
-utilising both the bootstrap 4
-`grid system <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
-and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
+
+A sphinx extension for creating panels in a grid layout or as drop-downs.
+
+- The ``panels`` directive creates panels of content in a grid layout, utilising both the bootstrap 4
+  `grid system <https://getbootstrap.com/docs/4.0/layout/grid/>`_,
+  and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
+- The ``link-button`` directive creates a click-able button, linking to a URL or reference,
+  and can also be used to make an entire panel click-able.
+- The ``dropdown`` directive creates toggle-able content.
 
 .. code-block:: rst
 
@@ -21,11 +28,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
         ---
 
-        Content of the bottom-left panel
+        .. dropdown:: Bottom-left panel
+
+            Hidden content
 
         ---
 
-        Content of the bottom-right panel
+        .. link-button:: https://example.com
+            :text: Clickable Panel
+            :classes: stretched-link
 
 .. panels::
 
@@ -37,11 +48,15 @@ and `cards layout <https://getbootstrap.com/docs/4.0/components/card/>`_.
 
     ---
 
-    Content of the bottom-left panel
+    .. dropdown:: Bottom-left panel
+
+        Hidden content
 
     ---
 
-    Content of the bottom-right panel
+    .. link-button:: https://example.com
+        :text: Clickable Panel
+        :classes: stretched-link
 
 .. tip::
 
@@ -60,10 +75,10 @@ You can install `sphinx-panels` with `pip`:
 
 .. _panels/usage:
 
-Usage
-=====
+Sphinx Configuration
+=====================
 
-In your ``conf.py`` configuration file, add ``sphinx_panels``
+In your ``conf.py`` configuration file, simply add ``sphinx_panels``
 to your extensions list, e.g.:
 
 .. code-block:: python
@@ -86,8 +101,8 @@ e.g. the default value (panels, header, footer) is:
     panels_delimiters = (r"^\-{3,}$", r"^\^{3,}$", r"^\+{3,}$")
 
 
-Detailed Examples
-=================
+Panels Usage
+============
 
 Grid Layout
 -----------
@@ -432,13 +447,168 @@ to make the entire panel clickable:
         :text: Go To Reference
         :classes: btn-outline-primary btn-block stretched-link
 
-Additional Examples
-===================
+
+Dropdown Usage
+==============
+
+The ``dropdown`` directive combines a `Bootstrap card <https://getbootstrap.com/docs/4.0/components/card/>`_
+with the `HTML details tag <https://www.w3schools.com/tags/tag_details.asp>`_ to create a collapsible
+drop-down panel.
 
 .. code-block:: rst
 
+    .. dropdown:: Click on me to see my content!
+
+        I'm the content which can be anything:
+
+        .. link-button:: https://example.com
+            :text: Like a Button
+            :classes: btn-primary
+
+.. dropdown:: Click on me to see my content!
+
+    I'm the content which can be anything:
+
+    .. link-button:: https://example.com
+        :text: Like a Button
+        :classes: btn-primary
+
+You can start with the panel open by default using the ``open`` option:
+
+.. code-block:: rst
+
+    .. dropdown:: My Content
+        :open:
+
+        Is already visible
+
+.. dropdown:: My Content
+    :open:
+
+    Is already visible
+
+If the drop-down has no title assigned, it will display an ellipsis, which is hidden when open:
+
+.. code-block:: rst
+
+    .. dropdown::
+
+        My Content
+
+.. dropdown::
+
+    My Content
+
+The overarching container, title banner and body panel can all be styled by assigning classes.
+Adding `+` at the start appends the classes to any default ones.
+
+.. code-block:: rst
+
+    .. dropdown:: My Content
+        :container: + shadow
+        :title: bg-primary text-white text-center font-weight-bold
+        :body: bg-light text-right font-italic
+
+        Is formatted
+
+.. dropdown:: My Content
+    :container: + shadow
+    :title: bg-primary text-white text-center font-weight-bold
+    :body: bg-light text-right font-italic
+
+    Is formatted
+
+Transition Animation
+--------------------
+
+Adding the ``animate`` option will trigger an animation when the content of the drop-down is opened.
+
+.. code-block:: rst
+
+    .. dropdown:: My content will fade in
+        :animate: fade-in
+
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.. dropdown:: My content will fade in
+    :animate: fade-in
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.. dropdown:: My content will fade in and slide down
+    :animate: fade-in-slide-down
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+.. note::
+
+    Current available inputs: ``fade-in``, ``fade-in-slide-down``
+
+Combined Example
+================
+
+.. code-block:: rst
+
+    .. dropdown:: Panels in a drop-down
+        :title: bg-success text-warning
+        :open:
+        :animate: fade-in-slide-down
+
+        .. panels::
+            :container: container-fluid pb-1
+            :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
+            :card: shadow
+            :header: border-0
+            :footer: border-0
+
+            ---
+            :card: + bg-warning
+
+            header
+            ^^^^^^
+
+            Content of the top-left panel
+
+            ++++++
+            footer
+
+            ---
+            :card: + bg-info
+            :footer: + bg-danger
+
+            header
+            ^^^^^^
+
+            Content of the top-right panel
+
+            ++++++
+            footer
+
+            ---
+            :column: col-lg-12 p-3
+            :card: + text-center
+
+            .. link-button:: panels/usage
+                :type: ref
+                :text: Clickable Panel
+                :classes: btn-link stretched-link font-weight-bold
+
+.. dropdown:: Panels in a drop-down
+    :title: bg-success text-warning
+    :open:
+    :animate: fade-in-slide-down
+
     .. panels::
-        :container: container-fluid pb-3
+        :container: container-fluid pb-1
         :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
         :card: shadow
         :header: border-0
@@ -469,48 +639,16 @@ Additional Examples
 
         ---
         :column: col-lg-12 p-3
-        :card: + bg-success text-center
+        :card: + text-center
 
-        Content of the bottom panel
+        .. link-button:: panels/usage
+            :type: ref
+            :text: Clickable Panel
+            :classes: btn-link stretched-link font-weight-bold
 
-
-.. panels::
-    :container: container-fluid pb-3
-    :column: col-lg-6 col-md-6 col-sm-12 col-xs-12 p-2
-    :card: shadow
-    :header: border-0
-    :footer: border-0
-
-    ---
-    :card: + bg-warning
-
-    header
-    ^^^^^^
-
-    Content of the top-left panel
-
-    ++++++
-    footer
-
-    ---
-    :card: + bg-info
-    :footer: + bg-danger
-
-    header
-    ^^^^^^
-
-    Content of the top-right panel
-
-    ++++++
-    footer
-
-    ---
-    :column: col-lg-12 p-3
-    :card: + bg-success text-center
-
-    Content of the bottom panel
 
 Acknowledgements
 ================
 
-Originally adapted from the `pandas documentation <https://pandas.pydata.org/docs/>`_.
+- Panels originally adapted from the `pandas documentation <https://pandas.pydata.org/docs/>`_.
+- Dropdown originally adapted from `tk0miya/sphinxcontrib-details-directive  <https://github.com/tk0miya/sphinxcontrib-details-directive/>`_.
