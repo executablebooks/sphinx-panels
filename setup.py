@@ -29,13 +29,19 @@ setup(
             "css/bs-grids.css",
             "css/bs-borders.css",
             "css/bs-buttons.css",
+            "css/panels-bootstrap.min.css",
             "css/sphinx-dropdown.css",
         ]
     },
     install_requires=["docutils", "sphinx"],
     extras_require={
         "rtd": ["sphinx-rtd-theme"],
-        "code_style": ["flake8<3.8.0,>=3.7.0", "black", "pre-commit==1.17.0"],
+        "code_style": [
+            "flake8<3.8.0,>=3.7.0",
+            "black",
+            "pre-commit==1.17.0",
+            "csscompressor",
+        ],
         "testing": ["pytest>=3.6,<4"],
     },
     classifiers=[
