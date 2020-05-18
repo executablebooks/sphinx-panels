@@ -78,7 +78,7 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 Installation
 ============
 
-You can install `sphinx-panels` with `pip`:
+You can install ``sphinx-panels`` with ``pip``:
 
 .. code-block:: bash
 
@@ -118,15 +118,15 @@ Panels Usage
 Grid Layout
 -----------
 
-Panels are split by three or more `-` characters.
+Panels are split by three or more ``-`` characters.
 The layout of panels is then set by using the bootstrap classes.
 Default classes for all panels may be set in the directive options,
 then panel specific classes can be added at the start of each panel.
 
 By default the new classes will override those set previously
 (as defaults or in the top level options),
-but starting the option value with `+` will make the classes additive.
-For example the following options will set the first panel's card to have both the `shadow` and `bg-info` classes:
+but starting the option value with ``+`` will make the classes additive.
+For example the following options will set the first panel's card to have both the ``shadow`` and ``bg-info`` classes:
 
 .. code-block:: rst
 
@@ -184,7 +184,7 @@ Card Layout
 -----------
 
 Each panel contains a card, which can itself contain a header and/or footer,
-split by three or more `^^^` and `+++` respectively.
+split by three or more ``^^^`` and ``+++`` respectively.
 
 .. seealso::
 
@@ -256,9 +256,9 @@ You can add your own CSS (see
 `the html_css_files option <https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_css_files>`_)
 but it is advised you use the built-in bootstrap classes:
 
-- `Card colouring <https://getbootstrap.com/docs/4.0/utilities/colors/>`_  contextual classes: `bg-primary`, `bg-success`, `bg-info`, `bg-warning`, `bg-danger`, `bg-secondary`, `bg-dark` and `bg-light`.
-- `Padding and margins <https://getbootstrap.com/docs/4.0/utilities/spacing/>`_: `border-0`, `p-2`, `m-2`, ---
-- `Text alignment <https://getbootstrap.com/docs/4.0/utilities/text/#text-alignment>`_: `text-justify`, `text-left`, `text-center`, `text-right`
+- `Card colouring <https://getbootstrap.com/docs/4.0/utilities/colors/>`_  contextual classes: ``bg-primary``, ``bg-success``, ``bg-info``, ``bg-warning``, ``bg-danger``, ``bg-secondary`, ``bg-dark`` and ``bg-light``.
+- `Padding and margins <https://getbootstrap.com/docs/4.0/utilities/spacing/>`_: ``border-0``, ``p-2``, ``m-2``, ---
+- `Text alignment <https://getbootstrap.com/docs/4.0/utilities/text/#text-alignment>`_: ``text-justify``, ``text-left``, ``text-center``, ``text-right``
 
 .. code-block:: rst
 
@@ -511,7 +511,7 @@ If the drop-down has no title assigned, it will display an ellipsis, which is hi
     My Content
 
 The overarching container, title banner and body panel can all be styled by assigning classes.
-Adding `+` at the start appends the classes to any default ones.
+Adding ``+`` at the start appends the classes to any default ones.
 
 .. code-block:: rst
 
@@ -563,6 +563,23 @@ Adding the ``animate`` option will trigger an animation when the content of the 
 .. note::
 
     Current available inputs: ``fade-in``, ``fade-in-slide-down``
+
+Div Directive
+=============
+
+The ``div`` directive is the same as the `container directive <https://docutils.sourceforge.io/docs/ref/rst/directives.html#container>`_,
+but does not add a ``container`` class in HTML outputs, which is incompatible with Bootstrap CSS:
+
+.. code-block:: rst
+
+    .. div:: text-primary
+
+        hallo
+
+.. div:: text-primary
+
+    hallo
+
 
 Combined Example
 ================

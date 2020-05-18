@@ -2,6 +2,7 @@
 import os
 
 from docutils import nodes
+from docutils.parsers.rst import directives, Directive
 
 from .button import setup_link_button
 from .dropdown import setup_dropdown
@@ -20,6 +21,37 @@ def add_static_paths(app):
         app.add_css_file("panels-bootstrap.min.css")
 
 
+class Div(Directive):
+    """Same as the ``container`` directive,
+    but does not add the ``container`` class in HTML outputs,
+    which can interfere with Bootstrap CSS.
+    """
+
+    optional_arguments = 1
+    final_argument_whitespace = True
+    option_spec = {"name": directives.unchanged}
+    has_content = True
+
+    def run(self):
+        self.assert_has_content()
+        text = "\n".join(self.content)
+        try:
+            if self.arguments:
+                classes = directives.class_option(self.arguments[0])
+            else:
+                classes = []
+        except ValueError:
+            raise self.error(
+                'Invalid class attribute value for "%s" directive: "%s".'
+                % (self.name, self.arguments[0])
+            )
+        node = nodes.container(text, is_div=True)
+        node["classes"].extend(classes)
+        self.add_name(node)
+        self.state.nested_parse(self.content, self.content_offset, node)
+        return [node]
+
+
 def visit_container(self, node):
     classes = "docutils container"
     if node.get("is_div", False):
@@ -33,7 +65,7 @@ def depart_container(self, node):
 
 
 def setup(app):
-
+    app.add_directive("div", Div)
     app.add_config_value("panels_add_boostrap_css", True, "env")
     app.connect("builder-inited", add_static_paths)
     # we override container html visitors, to stop the default behaviour
