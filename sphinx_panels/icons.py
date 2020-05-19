@@ -18,7 +18,7 @@ OPTICON_CSS = """\
 
 @lru_cache(1)
 def get_opticon_data():
-    path = Path(__file__).parent.joinpath("data", f"opticons.json")
+    path = Path(__file__).parent.joinpath("data", "opticons.json")
     return json.loads(path.read_text())
 
 
