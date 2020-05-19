@@ -22,6 +22,8 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 
         Content of the top-right panel
 
+        :badge:`example,badge-primary`
+
         ---
 
         .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
@@ -41,6 +43,8 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
     ---
 
     Content of the top-right panel
+
+    :badge:`example,badge-primary`
 
     ---
 
@@ -504,7 +508,7 @@ The ``link-badge`` also adds the ability to use a link to a URI or reference:
 
 :link-badge:`https://example.com,cls=badge-primary text-white,tooltip=a tooltip`
 :link-badge:`https://example.com,"my, text",cls=badge-dark text-white`
-:link-badge:`panels/usage,my reference,ref,badge-success text-white,hallo`
+:link-badge:`panels/usage,my reference,ref,badge-success text-white`
 
 Note the inputs are parsed by the following functions. The role text therefore uses these
 function signatures, except you don't need to use quoted strings,
