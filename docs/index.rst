@@ -22,6 +22,8 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 
         Content of the top-right panel
 
+        :badge:`example,badge-primary`
+
         ---
 
         .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
@@ -41,6 +43,8 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
     ---
 
     Content of the top-right panel
+
+    :badge:`example,badge-primary`
 
     ---
 
@@ -463,6 +467,60 @@ to make the entire panel clickable:
         :text: Go To Reference
         :classes: btn-outline-primary btn-block stretched-link
 
+Link Badges
+===========
+
+Badges are inline text with special formatting. Use the ``badge`` role to assign
+`Bootstrap badge formatting <https://getbootstrap.com/docs/4.0/components/badge/>`_.
+Text and classes are delimited by a comma:
+
+.. code-block:: rst
+
+    :badge:`primary,badge-primary`
+
+    :badge:`primary,badge-primary badge-pill`
+
+:badge:`primary,badge-primary`
+:badge:`secondary,badge-secondary`
+:badge:`info,badge-info`
+:badge:`success,badge-success`
+:badge:`danger,badge-danger`
+:badge:`warning,badge-warning`
+:badge:`light,badge-light`
+:badge:`dark,badge-dark`
+
+:badge:`primary,badge-primary badge-pill`
+:badge:`secondary,badge-secondary badge-pill`
+:badge:`info,badge-info badge-pill`
+:badge:`success,badge-success badge-pill`
+:badge:`danger,badge-danger badge-pill`
+:badge:`warning,badge-warning badge-pill`
+:badge:`light,badge-light badge-pill`
+:badge:`dark,badge-dark badge-pill`
+
+The ``link-badge`` also adds the ability to use a link to a URI or reference:
+
+.. code-block:: rst
+
+    :link-badge:`https://example.com,cls=badge-primary text-white,tooltip=a tooltip`
+    :link-badge:`https://example.com,"my, text",cls=badge-dark text-white`
+    :link-badge:`panels/usage,my reference,ref,badge-success text-white,hallo`
+
+:link-badge:`https://example.com,cls=badge-primary text-white,tooltip=a tooltip`
+:link-badge:`https://example.com,"my, text",cls=badge-dark text-white`
+:link-badge:`panels/usage,my reference,ref,badge-success text-white`
+
+Note the inputs are parsed by the following functions. The role text therefore uses these
+function signatures, except you don't need to use quoted strings,
+unless the string contains a comma.
+
+.. code-block:: python
+
+    def get_badge_inputs(text, cls: str = ""):
+        return text, cls.split()
+
+    def get_link_badge_inputs(link, text=None, type="link", cls: str = "", tooltip=None):
+        return link, text or link, type, cls.split(), tooltip
 
 Dropdown Usage
 ==============
