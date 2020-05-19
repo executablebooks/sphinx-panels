@@ -25,10 +25,6 @@ setup(
     packages=find_packages(),
     package_data={
         "sphinx_panels": [
-            "css/bs-cards.css",
-            "css/bs-grids.css",
-            "css/bs-borders.css",
-            "css/bs-buttons.css",
             "css/panels-bootstrap.min.css",
             "css/sphinx-dropdown.css",
             "data/opticons.json",

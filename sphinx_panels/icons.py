@@ -1,9 +1,10 @@
-from ast import literal_eval
 from functools import lru_cache
 import json
 from pathlib import Path
 
 from docutils import nodes
+
+from .utils import string_to_func_inputs
 
 
 OPTICON_VERSION = "0.0.0-dd899ea"
@@ -71,30 +72,11 @@ def get_opticon(
     return f"<svg {opt_string}>{content}</svg>"
 
 
-def string_to_func_inputs(text):
-    # TODO is there a better way to do this?
-    args = []
-    kwargs = {}
-    for opt in text.split(","):
-        if "=" not in opt:
-            try:
-                args.append(literal_eval(opt))
-            except Exception:
-                args.append(opt)
-        else:
-            key, val = opt.split("=", maxsplit=1)
-            try:
-                kwargs[key.strip()] = literal_eval(val)
-            except Exception:
-                kwargs[key.strip()] = val
-    return args, kwargs
-
-
 def opticon_role(
     role, rawtext: str, text: str, lineno, inliner, options={}, content=[]
 ):
-    args, kwargs = string_to_func_inputs(text)
     try:
+        args, kwargs = string_to_func_inputs(text)
         svg = get_opticon(*args, **kwargs)
     except Exception as err:
         msg = inliner.reporter.error(f"Opticon input is invalid: {err}", line=lineno)
@@ -117,8 +99,8 @@ def create_fa_node(name, classes: str = None, style="fa"):
 
 
 def fontawesome_role(role, rawtext, text, lineno, inliner, options={}, content=[]):
-    args, kwargs = string_to_func_inputs(text)
     try:
+        args, kwargs = string_to_func_inputs(text)
         node = create_fa_node(*args, **kwargs)
     except Exception as err:
         msg = inliner.reporter.error(
