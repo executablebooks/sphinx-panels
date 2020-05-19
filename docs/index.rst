@@ -55,7 +55,7 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
         :classes: stretched-link
 
 .. dropdown:: :fa:`eye,mr-1` See this documentation in other themes
-    :title: text-primary font-weight-bold
+    :title: text-info font-weight-bold
 
     Click the links to see the documentation built with:
 
