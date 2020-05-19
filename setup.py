@@ -31,6 +31,7 @@ setup(
             "css/bs-buttons.css",
             "css/panels-bootstrap.min.css",
             "css/sphinx-dropdown.css",
+            "data/opticons.json",
         ]
     },
     install_requires=["docutils", "sphinx"],
