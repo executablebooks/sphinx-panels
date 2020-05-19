@@ -2,11 +2,6 @@
 sphinx-panels
 =============
 
-.. contents::
-    :local:
-    :depth: 2
-
-
 A sphinx extension for creating panels in a grid layout or as drop-downs.
 
 - The ``panels`` directive creates panels of content in a grid layout, utilising both the bootstrap 4
@@ -15,6 +10,7 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 - The ``link-button`` directive creates a click-able button, linking to a URL or reference,
   and can also be used to make an entire panel click-able.
 - The ``dropdown`` directive creates toggle-able content.
+- ``opticon`` and ``fa`` roles allow for inline icons to be added.
 
 .. code-block:: rst
 
@@ -28,7 +24,7 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 
         ---
 
-        .. dropdown:: Bottom-left panel
+        .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
 
             Hidden content
 
@@ -48,7 +44,7 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 
     ---
 
-    .. dropdown:: Bottom-left panel
+    .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
 
         Hidden content
 
@@ -58,8 +54,8 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
         :text: Clickable Panel
         :classes: stretched-link
 
-.. dropdown:: See this documentation in other themes...
-    :title: bg-info text-white
+.. dropdown:: :fa:`eye,mr-1` See this documentation in other themes
+    :title: text-primary font-weight-bold
 
     Click the links to see the documentation built with:
 
@@ -69,11 +65,20 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
     - `sphinx-book-theme <https://sphinx-panels.readthedocs.io/en/sphinx-book-theme/>`_
 
 
-.. tip::
+.. panels::
+    :column: col-lg-12 p-0
+    :header: text-secondary font-weight-bold
+
+    :fa:`arrows-alt,mr-1` Adaptive Sizing
+
+    ^^^
 
     Try shrinking the size of this window,
-    to see how the panels realign to compensate for small screens.
+    to see how the panels above realign to compensate for small screens.
 
+.. contents::
+    :local:
+    :depth: 2
 
 Installation
 ============
@@ -563,6 +568,45 @@ Adding the ``animate`` option will trigger an animation when the content of the 
 .. note::
 
     Current available inputs: ``fade-in``, ``fade-in-slide-down``
+
+Inline Icons
+============
+
+Inline icons can be added to your text from either the
+`GitHub octicon <https://octicons-git-v2.primer.now.sh/octicons/>`_ or
+`FontAwesome <https://fontawesome.com/icons?d=gallery&m=free>`_ libraries.
+
+====================================================== ===============================================
+rST                                                    Output
+====================================================== ===============================================
+``:opticon:`report```                                  :opticon:`report`
+``:opticon:`x-circle,text-white bg-danger,size=24```   :opticon:`x-circle,text-white bg-danger,size=24`
+``:fa:`save```                                         :fa:`save`
+``:fa:`spinner,text-white bg-primary fa-2x,style=fa``` :fa:`spinner,text-white bg-primary fa-2x,style=fa`
+====================================================== ===============================================
+
+Note that the theme you are using does not already include the FontAwesome CSS,
+it should be loaded in your ``conf.py``,
+with the `html_css_files <https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_css_files>`_ option, e.g.:
+
+.. code-block:: python
+
+    html_css_files = ["https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"]
+
+By default, icons will only be output in HTML formats.
+But if you want fontawesome icons to be output on LaTeX, using the `fontawesome package <https://ctan.org/pkg/fontawesome>`_,
+you can add to your ``conf.py``:
+
+.. code-block:: python
+
+    panels_add_fontawesome_latex = True
+
+Additional classes can be added after a comma delimiter.
+Also the size (16px or 24px) can be set for opticons, and the style/prefix for fontawesome (version 5).
+
+.. seealso::
+
+    https://www.w3schools.com/icons/fontawesome_icons_intro.asp
 
 Div Directive
 =============

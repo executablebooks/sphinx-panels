@@ -7,6 +7,7 @@ from docutils.parsers.rst import directives, Directive
 from .button import setup_link_button
 from .dropdown import setup_dropdown
 from .panels import setup_panels
+from .icons import setup_icons
 
 __version__ = "0.4.0"
 
@@ -77,6 +78,7 @@ def setup(app):
     setup_panels(app)
     setup_link_button(app)
     setup_dropdown(app)
+    setup_icons(app)
 
     return {
         "version": __version__,

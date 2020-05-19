@@ -1,3 +1,8 @@
+.octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+}
 details.dropdown .summary-title {
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -24,39 +29,39 @@ details.dropdown summary::-webkit-details-marker {
 details.dropdown summary:focus {
     outline: none;
 }
-details.dropdown summary:hover .summary-chevron-up svg,
-details.dropdown summary:hover .summary-chevron-down svg {
+details.dropdown summary:hover .summary-up svg,
+details.dropdown summary:hover .summary-down svg {
     opacity: 1;
 }
-details.dropdown .summary-chevron-up svg,
-details.dropdown .summary-chevron-down svg {
+details.dropdown .summary-up svg,
+details.dropdown .summary-down svg {
     opacity: 0.6;
 }
-details.dropdown .summary-chevron-up,
-details.dropdown .summary-chevron-down {
+details.dropdown .summary-up,
+details.dropdown .summary-down {
     pointer-events: none;
     position: absolute;
     top: 0.75em;
     right: 1em;
 }
-details.dropdown .summary-chevron-up svg,
-details.dropdown .summary-chevron-down svg {
+details.dropdown .summary-up svg,
+details.dropdown .summary-down svg {
     display: block;
 }
-details.dropdown[open] .summary-chevron-up{
+details.dropdown[open] .summary-down{
     visibility: hidden;
     /* z-index: -1; */
 }
-details.dropdown:not([open]) .summary-chevron-down{
+details.dropdown:not([open]) .summary-up{
     visibility: hidden;
     /* z-index: -1; */
 }
 
 /* Ellipsis added when no title */
-details.dropdown summary .ellipsis {
+details.dropdown summary .octicon.no-title {
     vertical-align: middle;
 }
-details.dropdown[open] summary .ellipsis{
+details.dropdown[open] summary .octicon.no-title{
     visibility: hidden;
 }
 

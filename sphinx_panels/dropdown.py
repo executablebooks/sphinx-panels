@@ -6,6 +6,8 @@ from sphinx.util.docutils import SphinxDirective
 from sphinx.transforms.post_transforms import SphinxPostTransform
 from sphinx.util.nodes import NodeMatcher
 
+from .icons import get_opticon
+
 
 def setup_dropdown(app):
     app.add_node(dropdown_main, html=(visit_dropdown_main, depart_dropdown_main))
@@ -50,7 +52,6 @@ class DropdownDirective(SphinxDirective):
         "title": directives.unchanged,
         "body": directives.unchanged,
         "open": directives.flag,
-        "marker-color": directives.unchanged,
         "name": directives.unchanged,
         "animate": lambda a: directives.choice(a, ("fade-in", "fade-in-slide-down")),
     }
@@ -83,7 +84,6 @@ class DropdownDirective(SphinxDirective):
 
         container = nodes.container(
             "",
-            marker_color=self.options.get("marker-color", "currentColor"),
             opened="open" in self.options,
             type="dropdown",
             has_title=len(self.arguments) > 0,
@@ -98,18 +98,10 @@ class DropdownDirective(SphinxDirective):
         return [container]
 
 
-CHEVRON = """\
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-    viewBox="0 0 24 24" fill="none"
-    stroke="{color}" stroke-width="2"stroke-linecap="round" stroke-linejoin="round"
->
-<polyline points="{points}"></polyline>
-</svg>"""
-
-ELLIPSIS = """\
+KEBAB = """\
 <svg viewBox="0 0 36 24" width="36" height="16" xmlns="http://www.w3.org/2000/svg"
-    data-icon="ui-components:ellipses" class="ellipsis">
-  <g xmlns="http://www.w3.org/2000/svg" class="jp-icon3" fill="currentColor">
+    class="octicon no-title" aria-hidden="true">
+  <g xmlns="http://www.w3.org/2000/svg" class="jp-icon3">
     <circle cx="0" cy="12" r="6"></circle>
     <circle cx="18" cy="12" r="6"></circle>
     <circle cx="36" cy="12" r="6"></circle>
@@ -128,30 +120,18 @@ class DropdownHtmlTransform(SphinxPostTransform):
             open_marker = nodes.container(
                 "",
                 nodes.raw(
-                    "",
-                    nodes.Text(
-                        CHEVRON.format(
-                            color=node["marker_color"], points="18 15 12 9 6 15"
-                        )
-                    ),
-                    format="html",
+                    "", nodes.Text(get_opticon("chevron-up", size=24)), format="html"
                 ),
                 is_div=True,
-                classes=["summary-chevron-down"],
+                classes=["summary-up"],
             )
             closed_marker = nodes.container(
                 "",
                 nodes.raw(
-                    "",
-                    nodes.Text(
-                        CHEVRON.format(
-                            color=node["marker_color"], points="6 9 12 15 18 9"
-                        )
-                    ),
-                    format="html",
+                    "", nodes.Text(get_opticon("chevron-down", size=24)), format="html"
                 ),
                 is_div=True,
-                classes=["summary-chevron-up"],
+                classes=["summary-down"],
             )
 
             newnode = dropdown_main(
@@ -163,7 +143,18 @@ class DropdownHtmlTransform(SphinxPostTransform):
                 title_children = node[0]
                 body_children = node[1:]
             else:
-                title_children = [nodes.raw("...", nodes.Text(ELLIPSIS), format="html")]
+                title_children = [
+                    nodes.raw(
+                        "...",
+                        nodes.Text(
+                            KEBAB
+                            # Note the custom opticon here has thicker dots
+                            # get_opticon("kebab-horizontal", classes="no-title",
+                            # size=24)
+                        ),
+                        format="html",
+                    )
+                ]
                 body_children = node
 
             newnode += dropdown_title(
