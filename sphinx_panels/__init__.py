@@ -9,7 +9,7 @@ from .dropdown import setup_dropdown
 from .panels import setup_panels
 from .icons import setup_icons
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 
 LOCAL_FOLDER = os.path.dirname(os.path.abspath(__file__))
