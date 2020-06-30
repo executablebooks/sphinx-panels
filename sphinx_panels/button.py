@@ -46,6 +46,7 @@ class LinkButton(SphinxDirective):
 
     has_content = False
     required_arguments = 1
+    final_argument_whitespace = True
     option_spec = {
         "type": lambda arg: directives.choice(arg, ("url", "ref")),
         "text": directives.unchanged,
