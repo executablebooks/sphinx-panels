@@ -4,21 +4,21 @@
 // Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 
 .card {
-  position: relative;
+  background-clip: border-box;
+  background-color: $white;
+  border: 1px solid $black-12-5;
+  border-radius: .25rem;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
+  position: relative;
   word-wrap: break-word;
-  background-color: $white;
-  background-clip: border-box;
-  border: 1px solid $black-12-5;
-  border-radius: .25rem;
 
   >hr {
-    margin-right: 0;
     margin-left: 0;
+    margin-right: 0;
   }
 
   >.list-group:first-child .list-group-item:first-child {
@@ -27,8 +27,8 @@
   }
 
   >.list-group:last-child .list-group-item:last-child {
-    border-bottom-right-radius: .25rem;
     border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
   }
 }
 
@@ -44,8 +44,8 @@
 }
 
 .card-subtitle {
-  margin-top: -.375rem;
   margin-bottom: 0;
+  margin-top: -.375rem;
 }
 
 .card-text:last-child {
@@ -61,10 +61,10 @@
 }
 
 .card-header {
-  padding: .75rem 1.25rem;
-  margin-bottom: 0;
   background-color: $black-3;
   border-bottom: 1px solid $black-12-5;
+  margin-bottom: 0;
+  padding: .75rem 1.25rem;
 }
 
 .card-header:first-child {
@@ -76,9 +76,9 @@
 }
 
 .card-footer {
-  padding: .75rem 1.25rem;
   background-color: $black-3;
   border-top: 1px solid $black-12-5;
+  padding: .75rem 1.25rem;
 }
 
 .card-footer:last-child {
@@ -86,24 +86,24 @@
 }
 
 .card-header-tabs {
-  margin-right: -.625rem;
+  border-bottom: 0;
   margin-bottom: -.75rem;
   margin-left: -.625rem;
-  border-bottom: 0;
+  margin-right: -.625rem;
 }
 
 .card-header-pills {
-  margin-right: -.625rem;
   margin-left: -.625rem;
+  margin-right: -.625rem;
 }
 
 .card-img-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
   bottom: 0;
   left: 0;
   padding: 1.25rem;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .card-img,
@@ -122,8 +122,8 @@
 
 .card-img,
 .card-img-bottom {
-  border-bottom-right-radius: calc(.25rem - 1px);
   border-bottom-left-radius: calc(.25rem - 1px);
+  border-bottom-right-radius: calc(.25rem - 1px);
 }
 
 .w-100 {
@@ -179,12 +179,6 @@ $semantic-colors-text: map-merge(
     color: $value !important;
   }
 }
-
-// @each $color, $value in $semantic-colors-text {
-//   .text-#{$color} {
-//     color: $value !important;
-//   }
-// }
 
 .bg-transparent {
   background-color: transparent !important;
