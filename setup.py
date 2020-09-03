@@ -23,23 +23,13 @@ setup(
     project_urls={"Documentation": "https://sphinx-panels.readthedocs.io"},
     license="MIT",
     packages=find_packages(),
-    package_data={
-        "sphinx_panels": [
-            "css/panels-bootstrap.min.css",
-            "css/sphinx-dropdown.css",
-            "data/opticons.json",
-        ]
-    },
-    install_requires=["docutils", "sphinx"],
+    include_package_data=True,
+    install_requires=["docutils", "sphinx>=2,<4", "pyScss~=1.3.7"],
     extras_require={
         "rtd": ["sphinx-rtd-theme"],
-        "code_style": [
-            "flake8<3.8.0,>=3.7.0",
-            "black",
-            "pre-commit==1.17.0",
-            "csscompressor",
-        ],
-        "testing": ["pytest>=3.6,<4"],
+        "code_style": ["pre-commit~=2.7.0"],
+        "testing": ["pytest~=6.0.1"],
+        "live-dev": ["sphinx-autobuild"],
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",

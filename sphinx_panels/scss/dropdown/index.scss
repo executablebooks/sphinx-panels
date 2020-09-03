@@ -1,0 +1,108 @@
+.octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-top;
+}
+
+details.dropdown {
+  .summary-title {
+    // don't overlap the chevron
+    padding-right: 3em !important;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .summary-content {
+    cursor: default;
+  }
+
+  summary {
+    padding: 1em;
+    // hide the default triangle marker
+    list-style: none;
+
+    // Ellipsis added when no title
+    .octicon.no-title {
+      vertical-align: middle;
+    }
+  }
+
+  &[open] summary .octicon.no-title {
+    visibility: hidden;
+  }
+
+  // chrome doesn't yet support list-style
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:focus {
+    outline: none;
+  }
+
+  summary:hover .summary-up svg,
+  summary:hover .summary-down svg {
+    opacity: 1;
+  }
+
+  .summary-up svg,
+  .summary-down svg {
+    display: block;
+    opacity: .6;
+  }
+
+  .summary-up,
+  .summary-down {
+    pointer-events: none;
+    position: absolute;
+    top: .75em;
+    right: 1em;
+  }
+
+  &[open] .summary-down {
+    visibility: hidden;
+  }
+
+  &:not([open]) .summary-up {
+    visibility: hidden;
+  }
+
+  // Transition animation
+  &.fade-in[open] summary~* {
+    animation: panels-fade-in .5s ease-in-out;
+    -moz-animation: panels-fade-in .5s ease-in-out;
+    -webkit-animation: panels-fade-in .5s ease-in-out;
+  }
+
+  &.fade-in-slide-down[open] summary~* {
+    animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
+    -moz-animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
+    -webkit-animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
+  }
+}
+
+@keyframes panels-fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes panels-slide-down {
+  0% {
+    transform: translate(0, -10px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}

@@ -1,0 +1,12 @@
+linters:
+  ImportantRule:
+    enabled: false
+  PropertySortOrder:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  SelectorDepth:
+    enabled: true
+    max_depth: 4
+  VendorPrefix:
+    enabled: false

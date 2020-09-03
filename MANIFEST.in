@@ -1,1 +1,21 @@
-graft doc/
+exclude docs
+recursive-exclude docs *
+exclude tests
+recursive-exclude tests *
+exclude .circleci
+recursive-exclude .circleci *
+
+exclude .pre-commit-config.yaml
+exclude .readthedocs.yml
+exclude .flake8
+exclude .scss-lint.yml
+exclude tox.ini
+exclude compile-scss.py
+exclude git_rebase_theme_branches.sh
+
+include LICENSE
+include README.md
+include CHANGELOG.md
+
+recursive-include sphinx_panels/scss *
+recursive-include sphinx_panels/data *
