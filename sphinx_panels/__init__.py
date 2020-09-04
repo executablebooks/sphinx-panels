@@ -1,12 +1,18 @@
 """"A sphinx extension to add a ``panels`` directive."""
 import hashlib
 from pathlib import Path
+import warnings
 
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
 from sphinx.application import Sphinx
 from sphinx.environment import BuildEnvironment
-from scss.compiler import compile_file
+from sphinx.util.logging import getLogger
+
+with warnings.catch_warnings():
+    # TODO this can re removed when pyScss 1.3.8 is released
+    warnings.simplefilter(action="ignore", category=FutureWarning)
+    from scss.compiler import compile_file
 
 from .button import setup_link_button
 from .dropdown import setup_dropdown
@@ -14,6 +20,8 @@ from .panels import setup_panels
 from .icons import setup_icons
 
 __version__ = "0.4.1"
+
+LOGGER = getLogger(__name__)
 
 
 def compile_scss(app: Sphinx):
@@ -56,6 +64,7 @@ def update_css_links(app: Sphinx, env: BuildEnvironment):
     # but this is actually quite hard to identify, since the builder name doesn't
     # always include 'html' (e.g. readthedocs)
     if env.panels_css_changed:
+        LOGGER.debug("sphinx-panels CSS changed; re-writing all files")
         return list(env.all_docs.keys())
 
 
