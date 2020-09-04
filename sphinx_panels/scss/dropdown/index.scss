@@ -8,10 +8,10 @@ details.dropdown {
   .summary-title {
     // don't overlap the chevron
     padding-right: 3em !important;
-    user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
+    user-select: none;
   }
 
   &:hover {
@@ -23,9 +23,9 @@ details.dropdown {
   }
 
   summary {
-    padding: 1em;
     // hide the default triangle marker
     list-style: none;
+    padding: 1em;
 
     // Ellipsis added when no title
     .octicon.no-title {
@@ -61,8 +61,8 @@ details.dropdown {
   .summary-down {
     pointer-events: none;
     position: absolute;
-    top: .75em;
     right: 1em;
+    top: .75em;
   }
 
   &[open] .summary-down {
@@ -75,15 +75,15 @@ details.dropdown {
 
   // Transition animation
   &.fade-in[open] summary~* {
-    animation: panels-fade-in .5s ease-in-out;
     -moz-animation: panels-fade-in .5s ease-in-out;
     -webkit-animation: panels-fade-in .5s ease-in-out;
+    animation: panels-fade-in .5s ease-in-out;
   }
 
   &.fade-in-slide-down[open] summary~* {
-    animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
     -moz-animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
     -webkit-animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
+    animation: panels-fade-in .5s ease-in-out, panels-slide-down .5s ease-in-out;
   }
 }
 

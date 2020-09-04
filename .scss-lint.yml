@@ -1,6 +1,9 @@
 linters:
   ImportantRule:
     enabled: false
+  SelectorDepth:
+    enabled: true
+    max_depth: 4
   QualifyingElement:
     enabled: false
   VendorPrefix:
