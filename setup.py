@@ -24,12 +24,16 @@ setup(
     license="MIT",
     packages=find_packages(),
     include_package_data=True,
-    install_requires=["docutils", "sphinx>=2,<4", "pyScss~=1.3.7"],
+    install_requires=[
+        "docutils",
+        "sphinx>=2,<4",
+        'importlib-resources~=3.0.0; python_version < "3.7"',
+    ],
     extras_require={
         "rtd": ["sphinx-rtd-theme"],
         "code_style": ["pre-commit~=2.7.0"],
         "testing": ["pytest~=6.0.1"],
-        "live-dev": ["sphinx-autobuild"],
+        "live-dev": ["sphinx-autobuild", "scss-compile~=0.1.3"],
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",

@@ -4,18 +4,21 @@ exclude tests
 recursive-exclude tests *
 exclude .circleci
 recursive-exclude .circleci *
+recursive-exclude ** __pycache__
+recursive-exclude **/__pycache__ *
 
 exclude .pre-commit-config.yaml
 exclude .readthedocs.yml
 exclude .flake8
 exclude .scss-lint.yml
 exclude tox.ini
-exclude compile-scss.py
 exclude git_rebase_theme_branches.sh
 
 include LICENSE
 include README.md
 include CHANGELOG.md
+include scss-compile-config.yml
 
 recursive-include sphinx_panels/scss *
+recursive-include sphinx_panels/_css *
 recursive-include sphinx_panels/data *

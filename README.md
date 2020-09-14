@@ -64,6 +64,35 @@ drop-down panel.
         :classes: btn-primary
 ```
 
+## Development
+
+To run the tests:
+
+```console
+pip install tox
+tox -e py37-sphinx3
+```
+
+To test building the docs:
+
+```console
+tox -e docs-clean html
+tox -e docs-rebuild html
+```
+
+For live builds of the docs:
+
+```console
+tox -e docs-live html
+```
+
+For code style and CSS updating:
+
+```console
+pip install pre-commit
+pre-commit run --all
+```
+
 [rtd-badge]: https://readthedocs.org/projects/sphinx-panels/badge/?version=latest
 [rtd-link]: https://sphinx-panels.readthedocs.io/en/latest/?badge=latest
 [black-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
