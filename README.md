@@ -86,7 +86,14 @@ For live builds of the docs:
 tox -e docs-live html
 ```
 
-For code style and CSS updating:
+You can also build the docs in different themes, by setting `HTML_THEME` to one of `alabaster`, `sphinx_rtd_theme`, `pydata_sphinx_theme`, `sphinx_book_theme`:
+
+```console
+export HTML_THEME=sphinx_book_theme
+tox -e docs-live
+```
+
+For code style and SCSS -> CSS updating:
 
 ```console
 pip install pre-commit

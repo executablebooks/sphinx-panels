@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build_docs:
+  docs_sphinx_book_theme:
     docker:
       - image: circleci/python:3.6-stretch
     steps:
@@ -12,7 +12,7 @@ jobs:
           keys:
             - cache-pip
 
-      - run: pip install --user .[rtd]
+      - run: pip install --user .[themes]
 
       - save_cache:
           key: cache-pip
@@ -23,6 +23,7 @@ jobs:
       - run:
           name: Build docs to store
           command: |
+            export HTML_THEME=sphinx_book_theme
             sphinx-build -W -b html docs docs/_build/html
       - store_artifacts:
           path: docs/_build/html/
@@ -33,4 +34,4 @@ workflows:
   version: 2
   default:
     jobs:
-      - build_docs
+      - docs_sphinx_book_theme

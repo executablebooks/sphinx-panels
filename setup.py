@@ -30,7 +30,11 @@ setup(
         'importlib-resources~=3.0.0; python_version < "3.7"',
     ],
     extras_require={
-        "rtd": ["sphinx-rtd-theme"],
+        "themes": [
+            "sphinx-rtd-theme",
+            "pydata-sphinx-theme~=0.4.0",
+            "sphinx-book-theme~=0.0.36",
+        ],
         "code_style": ["pre-commit~=2.7.0"],
         "testing": ["pytest~=6.0.1"],
         "live-dev": ["sphinx-autobuild", "scss-compile~=0.1.3"],

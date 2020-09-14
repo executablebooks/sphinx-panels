@@ -10,3 +10,4 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-path: 0/html/index.html
+          circleci-job: docs_sphinx_book_theme
