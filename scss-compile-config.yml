@@ -1,0 +1,8 @@
+scss-compile:
+  precision: 5
+  sourcemap: false
+  hash_filenames: true
+  hash_prefix: "--"
+  output_format: compressed
+  partial_depth: 0
+  translate: ["sphinx_panels/scss:sphinx_panels/_css"]

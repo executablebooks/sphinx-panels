@@ -28,6 +28,12 @@ repos:
     - id: check-manifest
 
   - repo: https://github.com/psf/black
-    rev: stable
+    rev: 20.8b1
     hooks:
     - id: black
+
+  - repo: https://github.com/executablebooks/scss-compile
+    rev: v0.1.3
+    hooks:
+      - id: scss-compile
+        args: [--config=scss-compile-config.yml]

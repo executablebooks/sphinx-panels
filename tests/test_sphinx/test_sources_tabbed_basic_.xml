@@ -1,0 +1,32 @@
+<document source="source">
+    <section ids="title" names="title">
+        <title>
+            Title
+        <container classes="tabbed-set" is_div="True">
+            <tabbed_input checked="True" id="mock-uuid" set_id="mock-uuid" type="radio">
+            <tabbed_label classes="tabbed-label" input_id="mock-uuid">
+                Tab 1
+            <container classes="tabbed-content" is_div="True">
+                <paragraph>
+                    Tab 1 content
+            <tabbed_input checked="False" id="mock-uuid" set_id="mock-uuid" type="radio">
+            <tabbed_label classes="tabbed-label" input_id="mock-uuid">
+                Tab 2
+            <container classes="tabbed-content pl-1 bg-primary" is_div="True">
+                <paragraph>
+                    Tab 2 content
+        <container classes="tabbed-set" is_div="True">
+            <tabbed_input checked="False" id="mock-uuid" set_id="mock-uuid" type="radio">
+            <tabbed_label classes="tabbed-label" input_id="mock-uuid">
+                Tab 3
+            <container classes="tabbed-content" is_div="True">
+                <paragraph>
+                    Tab 3 content
+                <literal_block force="False" highlight_args="{}" language="python" linenos="False" xml:space="preserve">
+                    import pip
+            <tabbed_input checked="True" id="mock-uuid" set_id="mock-uuid" type="radio">
+            <tabbed_label classes="tabbed-label" input_id="mock-uuid">
+                Tab 4
+            <container classes="tabbed-content" is_div="True">
+                <paragraph>
+                    Tab 4 content
