@@ -65,7 +65,7 @@ pygments_style = "sphinx"
 #
 # html_theme = "alabaster"
 
-theme_name = os.environ.get("HTML_THEME", "sphinx_rtd_theme")
+theme_name = os.environ.get("HTML_THEME", "alabaster")
 
 if theme_name == "sphinx_rtd_theme":
     html_theme = "sphinx_rtd_theme"
