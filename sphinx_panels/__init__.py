@@ -23,7 +23,7 @@ from .icons import setup_icons
 from ._css import panels as css_panels
 from ._css import bootstrap as css_bootstrap
 
-__version__ = "0.4.1"
+__version__ = "0.5.0"
 
 LOGGER = getLogger(__name__)
 
