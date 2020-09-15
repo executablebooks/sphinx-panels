@@ -664,7 +664,7 @@ Tabbed Content
 The ``tabbed`` directive generates tabbed selection panels.
 
 Sequential directives will be grouped together, unless the ``:new-group`` option is added.
-You can set which tab woll be shown by default, using the ``:selected:`` option.
+You can set which tab will be shown by default, using the ``:selected:`` option.
 
 Tab directives can contain any content, and you can also set CSS classes with ``:class-label:`` and ``:class-content:``:
 

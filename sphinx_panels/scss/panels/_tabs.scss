@@ -41,6 +41,10 @@
   padding-top: px2rem(12px);
   width: 100%;
 
+  >:first-child {
+    margin-top: 0 !important;
+  }
+
   >:last-child {
     margin-bottom: 0 !important;
   }
