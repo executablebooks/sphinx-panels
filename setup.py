@@ -34,9 +34,10 @@ setup(
             "sphinx-rtd-theme",
             "pydata-sphinx-theme~=0.4.0",
             "sphinx-book-theme~=0.0.36",
+            "myst-parser~=0.12.9",
         ],
         "code_style": ["pre-commit~=2.7.0"],
-        "testing": ["pytest~=6.0.1"],
+        "testing": ["pytest~=6.0.1", "pytest-regressions~=2.0.1"],
         "live-dev": ["sphinx-autobuild", "scss-compile~=0.1.3"],
     },
     classifiers=[

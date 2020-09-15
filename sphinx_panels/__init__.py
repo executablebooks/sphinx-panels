@@ -1,4 +1,5 @@
 """"A sphinx extension to add a ``panels`` directive."""
+import hashlib
 from pathlib import Path
 
 try:
@@ -16,6 +17,7 @@ from sphinx.util.logging import getLogger
 from .button import setup_link_button
 from .dropdown import setup_dropdown
 from .panels import setup_panels
+from .tabs import setup_tabs
 from .icons import setup_icons
 
 from ._css import panels as css_panels
@@ -26,8 +28,25 @@ __version__ = "0.4.1"
 LOGGER = getLogger(__name__)
 
 
-def compile_scss(app: Sphinx):
+def get_default_css_variables():
+    return {
+        "tabs-color-label-active": "hsla(231, 99%, 66%, 1)",
+        "tabs-color-label-inactive": "rgba(178, 206, 245, 0.62)",
+        "tabs-color-overline": "rgb(207, 236, 238)",
+        "tabs-color-underline": "rgb(207, 236, 238)",
+    }
+
+
+def update_css(app: Sphinx):
     """Compile SCSS to the build directory."""
+    # merge user CSS variables with defaults
+    css_variables = get_default_css_variables()
+    for key, value in app.config.panels_css_variables.items():
+        if key not in css_variables:
+            LOGGER.warning(f"key in 'panels_css_variables' is not recognised: {key}")
+        else:
+            css_variables[key] = value
+
     # reset css changed attribute
     app.env.panels_css_changed = False
 
@@ -36,7 +55,7 @@ def compile_scss(app: Sphinx):
     static_path.mkdir(exist_ok=True)
     app.config.html_static_path.append(str(static_path))
 
-    existing_names = {path.name for path in static_path.glob("*") if path.is_file()}
+    old_resources = {path.name for path in static_path.glob("*") if path.is_file()}
 
     css_resources = [("spanels-", css_panels)]
     if app.config.panels_add_boostrap_css:
@@ -53,11 +72,26 @@ def compile_scss(app: Sphinx):
                 (static_path / out_name).write_text(content)
                 app.env.panels_css_changed = True
             app.add_css_file(prefix + filename)
-            if prefix + filename in existing_names:
-                existing_names.remove(prefix + filename)
+            if out_name in old_resources:
+                old_resources.remove(out_name)
+
+    # add variables CSS file
+    css_lines = [":root {"]
+    for name, value in css_variables.items():
+        css_lines.append(f"--{name}: {value};")
+    css_lines.append("}")
+    css_str = "\n".join(css_lines)
+    css_variables_name = (
+        f"spanels-variables--{hashlib.md5(css_str.encode('utf8')).hexdigest()}.css"
+    )
+    if css_variables_name in old_resources:
+        old_resources.remove(css_variables_name)
+        app.env.panels_css_changed = True
+    (static_path / css_variables_name).write_text(css_str)
+    app.add_css_file(css_variables_name)
 
     # remove old resources
-    for name in existing_names:
+    for name in old_resources:
         for path in Path(app.outdir).glob(f"**/{name}"):
             path.unlink()
 
@@ -117,8 +151,9 @@ def depart_container(self, node: nodes.Node):
 def setup(app: Sphinx):
     app.add_directive("div", Div)
     app.add_config_value("panels_add_boostrap_css", True, "env")
+    app.add_config_value("panels_css_variables", {}, "env")
     app.add_config_value("panels_dev_mode", False, "env")
-    app.connect("builder-inited", compile_scss)
+    app.connect("builder-inited", update_css)
     app.connect("env-updated", update_css_links)
     # we override container html visitors, to stop the default behaviour
     # of adding the `container` class to all nodes.container
@@ -129,6 +164,7 @@ def setup(app: Sphinx):
     setup_panels(app)
     setup_link_button(app)
     setup_dropdown(app)
+    setup_tabs(app)
     setup_icons(app)
 
     return {

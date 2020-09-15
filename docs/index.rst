@@ -10,31 +10,62 @@ A sphinx extension for creating panels in a grid layout or as drop-downs.
 - The ``link-button`` directive creates a click-able button, linking to a URL or reference,
   and can also be used to make an entire panel click-able.
 - The ``dropdown`` directive creates toggle-able content.
+- The ``tabbed`` directive creates tabbed content.
 - ``opticon`` and ``fa`` roles allow for inline icons to be added.
 
-.. code-block:: rst
+.. tabbed:: ReStructuredText
 
-    .. panels::
+    .. code-block:: rst
 
+        .. panels::
+
+            Content of the top-left panel
+
+            ---
+
+            Content of the top-right panel
+
+            :badge:`example,badge-primary`
+
+            ---
+
+            .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
+
+                Hidden content
+
+            ---
+
+            .. link-button:: https://example.com
+                :text: Clickable Panel
+                :classes: stretched-link
+
+.. tabbed:: MyST Markdown
+
+    .. code-block:: md
+
+        ````{panels}
         Content of the top-left panel
 
         ---
 
         Content of the top-right panel
 
-        :badge:`example,badge-primary`
+        {badge}`example,badge-primary`
 
         ---
 
-        .. dropdown:: :fa:`eye,mr-1` Bottom-left panel
-
-            Hidden content
+        ```{dropdown} :fa:`eye,mr-1` Bottom-left panel
+        Hidden content
+        ```
 
         ---
 
-        .. link-button:: https://example.com
-            :text: Clickable Panel
-            :classes: stretched-link
+        ```{link-button} https://example.com
+        :text: Clickable Panel
+        :classes: stretched-link
+        ```
+
+        ````
 
 .. panels::
 
@@ -626,6 +657,122 @@ Adding the ``animate`` option will trigger an animation when the content of the 
 .. note::
 
     Current available inputs: ``fade-in``, ``fade-in-slide-down``
+
+Tabbed Content
+==============
+
+The ``tabbed`` directive generates tabbed selection panels.
+
+Sequential directives will be grouped together, unless the ``:new-group`` option is added.
+You can set which tab woll be shown by default, using the ``:selected:`` option.
+
+Tab directives can contain any content, and you can also set CSS classes with ``:class-label:`` and ``:class-content:``:
+
+.. code-block:: rst
+
+    .. tabbed:: Tab 1
+
+        Tab 1 content
+
+    .. tabbed:: Tab 2
+        :class-content: pl-1 bg-primary
+
+        Tab 2 content
+
+    .. tabbed:: Tab 3
+        :new-group:
+
+        .. code-block:: python
+
+            import pip
+
+    .. tabbed:: Tab 4
+        :selected:
+
+        .. dropdown:: Nested Dropdown
+
+            Some content
+
+.. tabbed:: Tab 1
+
+    Tab 1 content
+
+.. tabbed:: Tab 2
+    :class-content: pl-1 bg-primary
+
+    Tab 2 content
+
+.. tabbed:: Tab 3
+    :new-group:
+
+    .. code-block:: python
+
+        import pip
+
+.. tabbed:: Tab 4
+    :selected:
+
+    .. dropdown:: Nested Dropdown
+
+        Some content
+
+Here's an example of showing an example in multiple programming languages:
+
+.. tabbed:: c++
+
+    .. code-block:: c++
+
+        int main(const int argc, const char **argv) {
+          return 0;
+        }
+
+.. tabbed:: python
+
+    .. code-block:: python
+
+        def main():
+            return
+
+.. tabbed:: java
+
+    .. code-block:: java
+
+        class Main {
+            public static void main(String[] args) {
+            }
+        }
+
+.. tabbed:: julia
+
+    .. code-block:: julia
+
+        function main()
+        end
+
+.. tabbed:: fortran
+
+    .. code-block:: fortran
+
+        PROGRAM main
+        END PROGRAM main
+
+You can also control the colors of the labels and lines, setting ``panels_css_variables`` in your ``conf.py``.
+Here are the defaults:
+
+.. code-block:: python
+
+    panels_css_variables = {
+        "tabs-color-label-active": "hsla(231, 99%, 66%, 1)",
+        "tabs-color-label-inactive": "rgba(178, 206, 245, 0.62)",
+        "tabs-color-overline": "rgb(207, 236, 238)",
+        "tabs-color-underline": "rgb(207, 236, 238)",
+    }
+
+.. seealso::
+
+    Note, the `sphinx-tabs <https://github.com/executablebooks/sphinx-tabs>`__ package also offers directives to create tabs.
+    The key difference is that, whereas ``sphinx-tabs`` uses JavaScript to implement this functionality, ``sphinx-panels`` only uses CSS.
+    A CSS only solution has the benefit of faster load-times, and working when JS is disabled, although JS allows ``sphinx-tabs`` to implement some extended functionality (like synchronized selections).
 
 Inline Icons
 ============
