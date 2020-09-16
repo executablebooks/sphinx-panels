@@ -1,3 +1,5 @@
+.. _panels/usage:
+
 =============
 sphinx-panels
 =============
@@ -124,8 +126,6 @@ You can install ``sphinx-panels`` with ``pip``:
 
     pip install sphinx-panels
 
-.. _panels/usage:
-
 Sphinx Configuration
 =====================
 
@@ -151,6 +151,7 @@ e.g. the default value (panels, header, footer) is:
 
     panels_delimiters = (r"^\-{3,}$", r"^\^{3,}$", r"^\+{3,}$")
 
+.. _components-panels:
 
 Panels Usage
 ============
@@ -433,6 +434,8 @@ but classes can also be used to add padding:
     ++++++
     tail 1
 
+.. _components-buttons:
+
 Link Buttons
 ============
 
@@ -498,6 +501,8 @@ to make the entire panel clickable:
         :text: Go To Reference
         :classes: btn-outline-primary btn-block stretched-link
 
+.. _components-badges:
+
 Link Badges
 ===========
 
@@ -552,6 +557,8 @@ unless the string contains a comma.
 
     def get_link_badge_inputs(link, text=None, type="link", cls: str = "", tooltip=None):
         return link, text or link, type, cls.split(), tooltip
+
+.. _components-dropdown:
 
 Dropdown Usage
 ==============
@@ -657,6 +664,8 @@ Adding the ``animate`` option will trigger an animation when the content of the 
 .. note::
 
     Current available inputs: ``fade-in``, ``fade-in-slide-down``
+
+.. _components-tabbed:
 
 Tabbed Content
 ==============
@@ -774,6 +783,8 @@ Here are the defaults:
     The key difference is that, whereas ``sphinx-tabs`` uses JavaScript to implement this functionality, ``sphinx-panels`` only uses CSS.
     A CSS only solution has the benefit of faster load-times, and working when JS is disabled, although JS allows ``sphinx-tabs`` to implement some extended functionality (like synchronized selections).
 
+.. _components-icons:
+
 Inline Icons
 ============
 
@@ -812,6 +823,8 @@ Also the size (16px or 24px) can be set for opticons, and the style/prefix for f
 .. seealso::
 
     https://www.w3schools.com/icons/fontawesome_icons_intro.asp
+
+.. _components-div:
 
 Div Directive
 =============
