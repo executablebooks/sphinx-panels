@@ -4,10 +4,18 @@
 [![Code style: black][black-badge]][black-link]
 [![PyPI][pypi-badge]][pypi-link]
 
-A sphinx extension for creating panels in a grid layout.
-utilising both the bootstrap 4
-[grid system](https://getbootstrap.com/docs/4.0/layout/grid/),
-and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
+A sphinx extension for creating document components optimised for HTML+CSS.
+
+- The `panels` directive creates panels of content in a grid layout, utilising both the Bootstrap 4 [grid system](https://getbootstrap.com/docs/4.0/layout/grid/), and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
+
+- The `link-button` directive creates a click-able button, linking to a URL or reference, and can also be used to make an entire panel click-able.
+
+- The `dropdown` directive creates toggle-able content.
+
+- The `tabbed` directive creates tabbed content.
+
+- `opticon` and `fa` (fontawesome) roles allow for inline icons to be added.
+
 
 ```rst
 .. panels::
