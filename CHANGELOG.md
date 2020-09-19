@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.5.0 - 2020-10-15
+## v0.5.0 - 2020-09-15
 
 ✨ NEW: Add `tabbed` directive, to create tab groups!
 See [this documentation section](https://sphinx-panels.readthedocs.io/en/latest/#tabbed-content).
