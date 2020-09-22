@@ -38,7 +38,7 @@ setup(
         ],
         "code_style": ["pre-commit~=2.7.0"],
         "testing": ["pytest~=6.0.1", "pytest-regressions~=2.0.1"],
-        "live-dev": ["sphinx-autobuild", "scss-compile~=0.1.3"],
+        "live-dev": ["sphinx-autobuild", "web-compile~=0.2.0"],
     },
     classifiers=[
         "License :: OSI Approved :: MIT License",

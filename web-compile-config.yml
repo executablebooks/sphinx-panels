@@ -1,0 +1,8 @@
+web-compile:
+  sass:
+    files:
+      sphinx_panels/scss/bootstrap/index.scss: sphinx_panels/_css/panels-bootstrap.[hash].css
+      sphinx_panels/scss/panels/index.scss: sphinx_panels/_css/panels-main.[hash].css
+    precision: 5
+    sourcemap: false
+    format: compressed
