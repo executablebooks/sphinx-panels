@@ -775,7 +775,7 @@ Here are the defaults:
         "tabs-color-label-inactive": "rgba(178, 206, 245, 0.62)",
         "tabs-color-overline": "rgb(207, 236, 238)",
         "tabs-color-underline": "rgb(207, 236, 238)",
-        "tabs-size-label": "1.25rem",
+        "tabs-size-label": "1rem",
     }
 
 .. seealso::
