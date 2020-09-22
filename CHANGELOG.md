@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.1 - 2020-09-22
+
+👌 IMPROVE: Make default label font-size configurable for `tabbed` components.
+See the `panels_css_variables` [in this documentation section](https://sphinx-panels.readthedocs.io/en/latest/#tabbed-content).
+
 ## v0.5.0 - 2020-09-15
 
 ✨ NEW: Add `tabbed` directive, to create tab groups!
