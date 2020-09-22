@@ -17,7 +17,7 @@ exclude git_rebase_theme_branches.sh
 include LICENSE
 include README.md
 include CHANGELOG.md
-include scss-compile-config.yml
+include web-compile-config.yml
 
 recursive-include sphinx_panels/scss *
 recursive-include sphinx_panels/_css *

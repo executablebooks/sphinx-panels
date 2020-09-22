@@ -20,8 +20,7 @@ from .panels import setup_panels
 from .tabs import setup_tabs
 from .icons import setup_icons
 
-from ._css import panels as css_panels
-from ._css import bootstrap as css_bootstrap
+from . import _css as css_module
 
 __version__ = "0.5.0"
 
@@ -34,6 +33,7 @@ def get_default_css_variables():
         "tabs-color-label-inactive": "rgba(178, 206, 245, 0.62)",
         "tabs-color-overline": "rgb(207, 236, 238)",
         "tabs-color-underline": "rgb(207, 236, 238)",
+        "tabs-size-label": "1.25rem",
     }
 
 
@@ -55,25 +55,21 @@ def update_css(app: Sphinx):
     static_path.mkdir(exist_ok=True)
     app.config.html_static_path.append(str(static_path))
 
+    # record current resources
     old_resources = {path.name for path in static_path.glob("*") if path.is_file()}
 
-    css_resources = [("spanels-", css_panels)]
-    if app.config.panels_add_boostrap_css:
-        css_resources.append(("spanels-bootstrap-", css_bootstrap))
-
-    # add new resources
-    for prefix, module in css_resources:
-        for filename in resources.contents(module):
-            if not filename.endswith(".css"):
-                continue
-            out_name = prefix + filename
-            if not (static_path / out_name).exists():
-                content = resources.read_text(module, filename)
-                (static_path / out_name).write_text(content)
-                app.env.panels_css_changed = True
-            app.add_css_file(prefix + filename)
-            if out_name in old_resources:
-                old_resources.remove(out_name)
+    # Add core CSS
+    css_files = [r for r in resources.contents(css_module) if r.endswith(".css")]
+    if not app.config.panels_add_boostrap_css:
+        css_files = [name for name in css_files if "bootstrap" not in name]
+    for filename in css_files:
+        app.add_css_file(filename)
+        if not (static_path / filename).exists():
+            content = resources.read_text(css_module, filename)
+            (static_path / filename).write_text(content)
+            app.env.panels_css_changed = True
+        if filename in old_resources:
+            old_resources.remove(filename)
 
     # add variables CSS file
     css_lines = [":root {"]
@@ -82,13 +78,14 @@ def update_css(app: Sphinx):
     css_lines.append("}")
     css_str = "\n".join(css_lines)
     css_variables_name = (
-        f"spanels-variables--{hashlib.md5(css_str.encode('utf8')).hexdigest()}.css"
+        f"panels-variables.{hashlib.md5(css_str.encode('utf8')).hexdigest()}.css"
     )
+    app.add_css_file(css_variables_name)
+    if not (static_path / css_variables_name).exists():
+        (static_path / css_variables_name).write_text(css_str)
+        app.env.panels_css_changed = True
     if css_variables_name in old_resources:
         old_resources.remove(css_variables_name)
-        app.env.panels_css_changed = True
-    (static_path / css_variables_name).write_text(css_str)
-    app.add_css_file(css_variables_name)
 
     # remove old resources
     for name in old_resources:

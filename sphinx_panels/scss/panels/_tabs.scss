@@ -96,7 +96,7 @@
     border-bottom: px2rem(2px) solid transparent;
     color: var(--tabs-color-label-inactive);
     cursor: pointer;
-    font-size: px2rem(20px);
+    font-size: var(--tabs-size-label);
     font-weight: 700;
     padding: px2em(20px, 20px) 1.25em px2em(10px, 20px);
     transition: color 250ms;
