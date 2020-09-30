@@ -142,7 +142,7 @@ to your extensions list, e.g.:
 
 This extension includes the bootstrap 4 CSS classes relevant to panels.
 They will be loaded by default but, if you are already using a bootstrap theme,
-you can disable this by adding ``panels_add_boostrap_css = False`` to your ``conf.py``.
+you can disable this by adding ``panels_add_bootstrap_css = False`` to your ``conf.py``.
 
 You can also change the delimiter regexes used by adding ``panel_delimiters`` to your ``conf.py``,
 e.g. the default value (panels, header, footer) is:
