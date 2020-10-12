@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.2 - 2020-10-12
+
+‼️ Deprecate `panels_add_boostrap_css` config, the typo here (no T!) has now been fixed to `panels_add_bootstrap_css`.
+Use of the former will now emit a deprecation warning.
+
 ## v0.5.1 - 2020-09-22
 
 👌 IMPROVE: Make default label font-size configurable for `tabbed` components.
