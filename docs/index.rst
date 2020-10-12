@@ -140,9 +140,13 @@ to your extensions list, e.g.:
         ...
     ]
 
-This extension includes the bootstrap 4 CSS classes relevant to panels.
-They will be loaded by default but, if you are already using a bootstrap theme,
-you can disable this by adding ``panels_add_boostrap_css = False`` to your ``conf.py``.
+This extension includes the bootstrap 4 CSS classes relevant to panels and loads it by default.
+However if you already load your own Bootstrap CSS (e.g., if your theme loads it already), you may choose *not* to add it with ``sphinx-panels``.
+To do so, use the following configuration in ``conf.py``:
+
+.. code-block:: python
+
+   panels_add_bootstrap_css = False
 
 You can also change the delimiter regexes used by adding ``panel_delimiters`` to your ``conf.py``,
 e.g. the default value (panels, header, footer) is:
