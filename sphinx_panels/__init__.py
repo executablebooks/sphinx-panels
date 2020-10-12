@@ -60,7 +60,14 @@ def update_css(app: Sphinx):
 
     # Add core CSS
     css_files = [r for r in resources.contents(css_module) if r.endswith(".css")]
-    if not app.config.panels_add_bootstrap_css:
+    if app.config.panels_add_boostrap_css is not None:
+        LOGGER.warning(
+            "`panels_add_boostrap_css` will be deprecated. Please use"
+            "`panels_add_bootstrap_css`."
+        )
+        app.config.panels_add_bootstrap_css = app.config.panels_add_boostrap_css
+
+    if app.config.panels_add_bootstrap_css is False:
         css_files = [name for name in css_files if "bootstrap" not in name]
     for filename in css_files:
         app.add_css_file(filename)
@@ -147,7 +154,8 @@ def depart_container(self, node: nodes.Node):
 
 def setup(app: Sphinx):
     app.add_directive("div", Div)
-    app.add_config_value("panels_add_bootstrap_css", True, "env")
+    app.add_config_value("panels_add_bootstrap_css", None, "env")
+    app.add_config_value("panels_add_boostrap_css", None, "env")
     app.add_config_value("panels_css_variables", {}, "env")
     app.add_config_value("panels_dev_mode", False, "env")
     app.connect("builder-inited", update_css)
