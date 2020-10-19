@@ -119,7 +119,7 @@ class TabSet:
 
 class TabbedHtmlTransform(SphinxPostTransform):
     default_priority = 200
-    builders = ("html", "dirhtml", "singlehtml", "readthedocs")
+    formats = ("html",)
 
     def get_unique_key(self):
         return str(uuid4())
