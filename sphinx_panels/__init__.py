@@ -67,7 +67,14 @@ def update_css(app: Sphinx):
         )
         app.config.panels_add_bootstrap_css = app.config.panels_add_boostrap_css
 
-    if app.config.panels_add_bootstrap_css is False:
+    bootstrap_themes = ["sphinx_book_theme", "pydata_sphinx_theme", "bootstrap"]
+    if app.config.html_theme in bootstrap_themes:
+        LOGGER.info(f"Using Sphinx theme for Bootstrap CSS: {app.config.html_theme}")
+        bootstrap_loaded = True
+    else:
+        bootstrap_loaded = False
+
+    if app.config.panels_add_bootstrap_css is False or bootstrap_loaded:
         css_files = [name for name in css_files if "bootstrap" not in name]
     for filename in css_files:
         app.add_css_file(filename)

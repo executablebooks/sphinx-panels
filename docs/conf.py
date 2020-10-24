@@ -79,10 +79,8 @@ elif theme_name == "alabaster":
     ]
 elif theme_name == "pydata_sphinx_theme":
     html_theme = "pydata_sphinx_theme"
-    panels_add_bootstrap_css = False
 elif theme_name == "sphinx_book_theme":
     html_theme = "sphinx_book_theme"
-    panels_add_bootstrap_css = False
     html_theme_options = {
         "single_page": True,
     }

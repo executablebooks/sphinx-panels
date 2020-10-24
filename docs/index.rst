@@ -140,13 +140,23 @@ to your extensions list, e.g.:
         ...
     ]
 
+Control whether bootstrap CSS is loaded
+---------------------------------------
+
 This extension includes the bootstrap 4 CSS classes relevant to panels and loads it by default.
-However if you already load your own Bootstrap CSS (e.g., if your theme loads it already), you may choose *not* to add it with ``sphinx-panels``.
-To do so, use the following configuration in ``conf.py``:
 
-.. code-block:: python
+However, ``sphinx-panels`` bootstrap CSS will **not** be used if one of the following is true:
 
-   panels_add_bootstrap_css = False
+- **You're using one of these bootstrap-based Sphinx themes**: ``sphinx_book_theme``, ``pydata_sphinx_theme``, ``bootstrap``.
+- **You manually specify that bootstrap CSS should not be loaded**. 
+  To do so, use the following configuration in ``conf.py``:
+
+  .. code-block:: python
+
+      panels_add_bootstrap_css = False
+
+Edit the regexes that separate panel sections
+---------------------------------------------
 
 You can also change the delimiter regexes used by adding ``panel_delimiters`` to your ``conf.py``,
 e.g. the default value (panels, header, footer) is:
