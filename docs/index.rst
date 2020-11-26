@@ -148,7 +148,7 @@ This extension includes the bootstrap 4 CSS classes relevant to panels and loads
 However, ``sphinx-panels`` bootstrap CSS will **not** be used if one of the following is true:
 
 - **You're using one of these bootstrap-based Sphinx themes**: ``sphinx_book_theme``, ``pydata_sphinx_theme``, ``bootstrap``.
-- **You manually specify that bootstrap CSS should not be loaded**. 
+- **You manually specify that bootstrap CSS should not be loaded**.
   To do so, use the following configuration in ``conf.py``:
 
   .. code-block:: python
