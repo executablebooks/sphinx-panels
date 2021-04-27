@@ -163,7 +163,10 @@ def setup(app: Sphinx):
     # we override container html visitors, to stop the default behaviour
     # of adding the `container` class to all nodes.container
     app.add_node(
-        nodes.container, override=True, html=(visit_container, depart_container)
+        nodes.container,
+        override=True,
+        html=(visit_container, depart_container),
+        singlehtml=(visit_container, depart_container),
     )
 
     setup_panels(app)

@@ -10,8 +10,16 @@ from .icons import get_opticon
 
 
 def setup_dropdown(app):
-    app.add_node(dropdown_main, html=(visit_dropdown_main, depart_dropdown_main))
-    app.add_node(dropdown_title, html=(visit_dropdown_title, depart_dropdown_title))
+    app.add_node(
+        dropdown_main,
+        html=(visit_dropdown_main, depart_dropdown_main),
+        singlehtml=(visit_dropdown_main, depart_dropdown_main),
+        )
+    app.add_node(
+        dropdown_title,
+        html=(visit_dropdown_title, depart_dropdown_title),
+        singlehtml=(visit_dropdown_title, depart_dropdown_title),
+        )
     app.add_directive("dropdown", DropdownDirective)
     app.add_post_transform(DropdownHtmlTransform)
 
