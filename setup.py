@@ -26,7 +26,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "docutils",
-        "sphinx>=2,<4",
+        "sphinx>=2,<5",
         'importlib-resources~=3.0.0; python_version < "3.7"',
     ],
     extras_require={
