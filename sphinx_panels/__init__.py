@@ -22,7 +22,7 @@ from .icons import setup_icons
 
 from . import _css as css_module
 
-__version__ = "0.5.2"
+__version__ = "0.6.0"
 
 LOGGER = getLogger(__name__)
 

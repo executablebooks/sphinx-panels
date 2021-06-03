@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.0 - 2021-06-03
+
+⬆️ UPGRADE: Unpin sphinx v4
+
+👌 IMPROVE: specify post-transforms by format:
+This applies them to the "html" format, rathther than a subset of diretive html builders.
+
 ## v0.5.2 - 2020-10-12
 
 ‼️ Deprecate `panels_add_boostrap_css` config, the typo here (no T!) has now been fixed to `panels_add_bootstrap_css`.
