@@ -8,7 +8,7 @@ sphinx-panels
 
    This repository is not actively maintained.
    Use `sphinx-design <https://github.com/executablebooks/sphinx-design>`_ instead!
-   See `the migration guide <https://sphinx-design.readthedocs.io/en/latest/get_started.html#migrating-from-sphinx-panels>`_ for more information.
+   See `the migration guide <https://sphinx-design.readthedocs.io/en/latest/get_started.html#migrating-from-sphinx-panels>`_ and `this github issue <https://github.com/executablebooks/sphinx-design/issues/51>`_ for more information.
 
 A sphinx extension for creating panels in a grid layout or as drop-downs.
 
