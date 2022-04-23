@@ -4,6 +4,10 @@
 sphinx-panels
 =============
 
+.. warning::
+
+   This repository is not actively maintained. Use `sphinx-design <https://github.com/executablebooks/sphinx-design>`_ instead!
+
 A sphinx extension for creating panels in a grid layout or as drop-downs.
 
 - The ``panels`` directive creates panels of content in a grid layout, utilising both the bootstrap 4

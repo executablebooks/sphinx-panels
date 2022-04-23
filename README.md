@@ -4,6 +4,8 @@
 [![Code style: black][black-badge]][black-link]
 [![PyPI][pypi-badge]][pypi-link]
 
+🚨This repository is not actively maintained. Use [`sphinx-design`](https://github.com/executablebooks/sphinx-design) instead!🚨
+
 A sphinx extension for creating document components optimised for HTML+CSS.
 
 - The `panels` directive creates panels of content in a grid layout, utilising both the Bootstrap 4 [grid system](https://getbootstrap.com/docs/4.0/layout/grid/), and [cards layout](https://getbootstrap.com/docs/4.0/components/card/).
