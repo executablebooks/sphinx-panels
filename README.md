@@ -4,7 +4,7 @@
 [![Code style: black][black-badge]][black-link]
 [![PyPI][pypi-badge]][pypi-link]
 
-🚨This repository is not actively maintained. Use [`sphinx-design`](https://github.com/executablebooks/sphinx-design) instead!🚨
+🚨This repository is not actively maintained. Use [`sphinx-design`](https://github.com/executablebooks/sphinx-design) instead! See [the migration guide](https://sphinx-design.readthedocs.io/en/latest/get_started.html#migrating-from-sphinx-panels) for more information.🚨
 
 A sphinx extension for creating document components optimised for HTML+CSS.
 

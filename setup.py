@@ -31,6 +31,7 @@ setup(
     ],
     extras_require={
         "themes": [
+            "sphinx>=4",
             "sphinx-rtd-theme",
             "pydata-sphinx-theme~=0.4.0",
             "sphinx-book-theme~=0.0.36",
