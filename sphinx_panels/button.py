@@ -18,25 +18,34 @@ def setup_link_button(app):
 
 def create_ref_node(link_type, uri, text, tooltip):
     innernode = nodes.inline(text, text)
-    if link_type == "ref":
-        ref_node = addnodes.pending_xref(
-            reftarget=unquote(uri),
-            reftype="any",
-            # refdoc=self.env.docname,
-            refdomain="",
-            refexplicit=True,
-            refwarn=True,
-        )
-        innernode["classes"] = ["xref", "any"]
-        # if tooltip:
-        #     ref_node["reftitle"] = tooltip
-        #     ref_node["title"] = tooltip
-        # TODO this doesn't work
-    else:
+    if link_type == "url":
         ref_node = nodes.reference()
         ref_node["refuri"] = uri
         if tooltip:
             ref_node["reftitle"] = tooltip
+    else:
+        if link_type == "ref":
+            link_type = "any"
+        if ":" in link_type:
+            refdomain, reftype = link_type.split(":", 1)
+            classes = ['xref', refdomain, "{0}-{1}".format(refdomain, reftype)]
+        else:
+            refdomain, reftype = "", link_type
+            classes = ['xref', reftype]
+        # breakpoint()
+        ref_node = addnodes.pending_xref(
+            reftarget=unquote(uri),
+            reftype=reftype,
+            # refdoc=self.env.docname,
+            refdomain=refdomain,
+            refexplicit=True,
+            refwarn=True,
+        )
+        innernode["classes"] = classes
+        # if tooltip:
+        #     ref_node["reftitle"] = tooltip
+        #     ref_node["title"] = tooltip
+        # TODO this doesn't work
     ref_node += innernode
     return ref_node
 
@@ -48,7 +57,7 @@ class LinkButton(SphinxDirective):
     required_arguments = 1
     final_argument_whitespace = True
     option_spec = {
-        "type": lambda arg: directives.choice(arg, ("url", "ref")),
+        "type": lambda arg: directives.choice(arg, ("url", "ref", "any", "doc", "std:ref")),
         "text": directives.unchanged,
         "tooltip": directives.unchanged,
         "classes": directives.unchanged,
