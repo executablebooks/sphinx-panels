@@ -1,4 +1,8 @@
-from uuid import uuid4
+import os
+import random
+import time
+import uuid
+
 from typing import Optional
 
 from docutils import nodes
@@ -9,6 +13,9 @@ from sphinx.util.logging import getLogger
 from sphinx.util.nodes import NodeMatcher
 
 LOGGER = getLogger(__name__)
+
+rnd = random.Random()
+rnd.seed(os.environ.get("SOURCE_DATE_EPOCH", time.time()))
 
 
 def setup_tabs(app):
@@ -122,7 +129,7 @@ class TabbedHtmlTransform(SphinxPostTransform):
     formats = ("html",)
 
     def get_unique_key(self):
-        return str(uuid4())
+        return uuid.UUID(int=rnd.getrandbits(128), version=4).hex
 
     def run(self):
         matcher = NodeMatcher(nodes.container, type="tabbed")
