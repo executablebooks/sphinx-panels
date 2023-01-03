@@ -1,12 +1,7 @@
 """"A sphinx extension to add a ``panels`` directive."""
 import hashlib
+import importlib.resources as resources
 from pathlib import Path
-
-try:
-    import importlib.resources as resources
-except ImportError:
-    # python < 3.7
-    import importlib_resources as resources
 
 from docutils import nodes
 from docutils.parsers.rst import directives, Directive
@@ -59,7 +54,9 @@ def update_css(app: Sphinx):
     old_resources = {path.name for path in static_path.glob("*") if path.is_file()}
 
     # Add core CSS
-    css_files = [r for r in resources.contents(css_module) if r.endswith(".css")]
+    css_files = [
+        r.name for r in resources.files(css_module).iterdir() if r.name.endswith(".css")
+    ]
     if app.config.panels_add_boostrap_css is not None:
         LOGGER.warning(
             "`panels_add_boostrap_css` will be deprecated. Please use"
@@ -72,8 +69,10 @@ def update_css(app: Sphinx):
     for filename in css_files:
         app.add_css_file(filename)
         if not (static_path / filename).exists():
-            content = resources.read_text(css_module, filename)
-            (static_path / filename).write_text(content)
+            with (resources.files(css_module) / filename).open(
+                encoding="utf-8", errors="strict"
+            ) as fp:
+                (static_path / filename).write_text(fp.read())
             app.env.panels_css_changed = True
         if filename in old_resources:
             old_resources.remove(filename)
