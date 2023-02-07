@@ -139,6 +139,7 @@ def setup_icons(app):
     app.add_node(
         fontawesome,
         html=(visit_fontawesome_html, depart_fontawesome_html),
+        singlehtml=(visit_fontawesome_html, depart_fontawesome_html),
         latex=(visit_fontawesome_latex, None),
         text=(None, None),
         man=(None, None),

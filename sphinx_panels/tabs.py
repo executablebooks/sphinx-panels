@@ -14,8 +14,16 @@ LOGGER = getLogger(__name__)
 def setup_tabs(app):
     app.add_directive("tabbed", TabbedDirective)
     app.add_post_transform(TabbedHtmlTransform)
-    app.add_node(tabbed_input, html=(visit_tabbed_input, depart_tabbed_input))
-    app.add_node(tabbed_label, html=(visit_tabbed_label, depart_tabbed_label))
+    app.add_node(
+        tabbed_input, 
+        html=(visit_tabbed_input, depart_tabbed_input),
+        singlehtml=(visit_tabbed_input, depart_tabbed_input),
+        )
+    app.add_node(
+        tabbed_label, 
+        html=(visit_tabbed_label, depart_tabbed_label),
+        singlehtml=(visit_tabbed_label, depart_tabbed_label),
+        )
 
 
 class tabbed_input(nodes.Element, nodes.General):
