@@ -5,7 +5,7 @@
 ⬆️ UPGRADE: Unpin sphinx v4
 
 👌 IMPROVE: specify post-transforms by format:
-This applies them to the "html" format, rathther than a subset of diretive html builders.
+This applies them to the "html" format, rathther than a subset of directive html builders.
 
 ## v0.5.2 - 2020-10-12
 
