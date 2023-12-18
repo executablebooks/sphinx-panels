@@ -2,6 +2,7 @@ from pathlib import Path
 import shutil
 
 import pytest
+import sphinx
 from sphinx.testing.path import path
 
 from sphinx_panels.tabs import TabbedHtmlTransform
@@ -15,7 +16,10 @@ def sphinx_app_factory(make_app, tmp_path: Path, monkeypatch):
         shutil.copytree(
             (Path(__file__).parent / "sources" / src_folder), tmp_path / src_folder
         )
-        app = make_app(srcdir=path(str((tmp_path / src_folder).absolute())), **kwargs)
+        srcdir = (tmp_path / src_folder).absolute()
+        if sphinx.version_info < (7, 2):
+            srcdir = path(str(srcdir))
+        app = make_app(srcdir=srcdir, **kwargs)
         return app
 
     yield _func
@@ -28,6 +32,8 @@ def test_sources(sphinx_app_factory, file_regression, folder):
     assert app._warning.getvalue() == ""
     doctree = app.env.get_and_resolve_doctree("index", app.builder)
     doctree["source"] = "source"
+    if sphinx.version_info < (7, 1):
+        doctree["translation_progress"] = "{'total': 0, 'translated': 0}"
     file_regression.check(
         doctree.pformat(),
         encoding="utf8",
