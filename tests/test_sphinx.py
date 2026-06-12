@@ -1,7 +1,9 @@
 from pathlib import Path
 import shutil
 
+import docutils
 import pytest
+from docutils.nodes import Element
 from sphinx.testing.path import path
 
 from sphinx_panels.tabs import TabbedHtmlTransform
@@ -28,6 +30,11 @@ def test_sources(sphinx_app_factory, file_regression, folder):
     assert app._warning.getvalue() == ""
     doctree = app.env.get_and_resolve_doctree("index", app.builder)
     doctree["source"] = "source"
+    if docutils.__version_info__ < (0, 22):
+        for node in doctree.findall(Element):
+            for name, value in node.attlist():
+                if isinstance(value, bool):
+                    node.attributes[name] = str(int(value))
     file_regression.check(
         doctree.pformat(),
         encoding="utf8",
